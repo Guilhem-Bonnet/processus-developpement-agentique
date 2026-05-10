@@ -1,0 +1,106 @@
+flowchart TD
+    A([Signal client ou opportunite]) --> B{Objectif de mission ?}
+
+    B -- "Creation de produit" --> C1["Intake entreprise-agent<br/>vision, valeur, parties prenantes"]
+    B -- "Evolution ou correction" --> C2["Audit cible<br/>symptome, comportement attendu, zone impactee"]
+    B -- "Refactoring ou reprise" --> C3["Audit existant<br/>dette, architecture, tests, risques"]
+    B -- "Analyse securite" --> C4["Regles d'engagement<br/>assets, autorisation, limites"]
+    B -- "Agent ou automatisation IA" --> C5["Cadrage agentique<br/>autonomie, outils, contexte, evals"]
+    B -- "Operation externe" --> C6["Controle impact externe<br/>cout, reseau, cloud, depot, production"]
+    B -- "Autre" --> C7["Qualification<br/>livrable, contrainte, definition de succes"]
+
+    C1 --> D
+    C2 --> D
+    C3 --> D
+    C4 --> D
+    C5 --> D
+    C6 --> D
+    C7 --> D
+
+    D{Besoin client testable ?}
+    D -- Non --> E["Discovery assistee<br/>5W2H, 5 Why, personas, parcours, risques"]
+    E --> F{Information deduisible du contexte ?}
+    F -- Oui --> G["Explorer le reel<br/>workspace, docs, historique, erreurs, references officielles"]
+    F -- Non --> H["Questions ciblees au client<br/>valeur, scope, hors-scope, criteres, contraintes"]
+    G --> D
+    H --> D
+
+    D -- Oui --> I["CDC niveau 0<br/>probleme, objectifs, valeur, scope, hors-scope, risques"]
+    I --> J{Surface de solution ?}
+    J -- "Frontend ou UX" --> K1["Cadrage UI/UX et DA<br/>parcours, etats, design system, accessibilite, prototype"]
+    J -- "Backend ou donnees" --> K2["Cadrage backend<br/>API, donnees, regles, auth, integrations"]
+    J -- "Fullstack" --> K3["Cadrage front et back<br/>flux, contrats, modeles, experience"]
+    J -- "Plateforme agentique" --> K4["Cadrage agent<br/>prompt, skills, tools, MCP, hooks, memoire"]
+    J -- "Lot technique" --> K5["Cadrage technique<br/>dette, performance, exploitation, migration"]
+
+    K1 --> L
+    K2 --> L
+    K3 --> L
+    K4 --> L
+    K5 --> L
+
+    L["CDC niveau 1<br/>comportements, parcours, user stories, acceptation"] --> M{Contraintes qualite et fiabilite definies ?}
+    M -- Non --> N["CDC niveau 2<br/>ISO 25010, securite, accessibilite, performance, data, ops, AI risk"]
+    N --> M
+    M -- Oui --> M2{Defauts IA couverts ?}
+
+    M2 -- Non --> N2["Barriere anti-defauts IA<br/>hallucination, surconfiance, oubli, complaisance, faux Done"]
+    N2 --> M2
+    M2 -- Oui --> O{Architecture et vues suffisantes ?}
+
+    O -- Non --> P["Architecture applicative et agentique<br/>C4, UML, BPMN, ADR, menaces, decisions"]
+    P --> O
+    O -- Oui --> Q{Contexte operationnel exploitable ?}
+
+    Q -- Non --> R["Context engineering<br/>workspace, docs, vector DB, Redis chaud, sources, fraicheur, confiance"]
+    R --> Q
+    Q -- Oui --> Q2{Profil de contexte defini ?}
+
+    Q2 -- Non --> R2["Context orchestration layer<br/>etape, budget, sources, task envelope, handoff"]
+    R2 --> Q2
+    Q2 -- Oui --> Q3{Modeles et connaissances gouvernes ?}
+
+    Q3 -- Non --> R3["Routage LLM et retention<br/>modele par tache, fallback, TTL, desindexation, purge"]
+    R3 --> Q3
+    Q3 -- Oui --> S{Orchestration prete ?}
+
+    S -- Non --> T["Configurer l'entreprise-agent<br/>prompts, skills, outils, MCP, hooks, subagents, permissions"]
+    T --> S
+    S -- Oui --> U{Backlog pilotable ?}
+
+    U -- Non --> V["CDC niveau 3 et Kanban<br/>lots, taches, DoR, DoD, dependances, risques, WIP"]
+    V --> U
+    U -- Oui --> W["Cycle continu agentique<br/>selection lot, plan court, execution, verification, livraison"]
+
+    W --> W2{Dry-run requis ?}
+    W2 -- Oui --> W3["Simulation pre-execution<br/>impact, permissions, cout, rollback, validation"]
+    W3 --> X
+    W2 -- Non --> X
+
+    X["Execution orchestree<br/>agent principal, subagents analyste, archi, design, dev, QA, securite, critique, ops"]
+    X --> Y{Hook ou politique bloque ?}
+    Y -- Oui --> Z["Stopper, reduire ou escalader<br/>risque, permission, alternative, decision client"]
+    Z --> W
+    Y -- Non --> AA["Verification multi-preuves<br/>tests, lint, build, rendu, scans, evals, revue, traces"]
+
+    AA --> AA2{Incident ou anomalie critique ?}
+    AA2 -- Oui --> AA3["Reprise agentique<br/>stop, containment, rollback, purge memoire, post-mortem"]
+    AA3 --> W
+    AA2 -- Non --> AB{Qualite prouvee ?}
+
+    AB -- Non --> AC["Diagnostic et correction<br/>cause racine, patch cible, re-test, mise a jour backlog"]
+    AC --> W
+    AB -- Oui --> AD{Validation client necessaire ?}
+
+    AD -- Oui --> AE["Dossier d'acceptation<br/>livrable, preuves, risques residuels, decisions"]
+    AE --> AF{Client accepte ?}
+    AF -- Non --> AG["Reviser besoin, scope ou priorite"]
+    AG --> D
+    AF -- Oui --> AH["Livrer et capitaliser<br/>docs, journal, memoire validee, backlog, monitoring"]
+
+    AD -- Non --> AH
+    AH --> AH2["Mesure continue<br/>SLO, evals, couts, traces, feedback, incidents"]
+    AH2 --> AI{Objectifs atteints durablement ?}
+    AI -- Non --> AJ["Apprentissage continu<br/>feedback, incident, metriques, evals, amelioration"]
+    AJ --> W
+    AI -- Oui --> AK([Livrable accepte et suivi])

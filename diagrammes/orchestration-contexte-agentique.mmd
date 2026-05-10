@@ -1,0 +1,29 @@
+flowchart TD
+    A([Etape courante du processus]) --> B["Profil de contexte<br/>role, objectif, risque, livrable"]
+    B --> C["Budget de contexte<br/>tiny, small, medium, deep"]
+    C --> D["Plan de recuperation<br/>quoi chercher, ou chercher, seuils"]
+
+    D --> E1["Redis chaud<br/>etat session, Kanban, cache, derniers resultats"]
+    D --> E2["Base vectorielle<br/>docs, ADR, incidents, patterns, similarite"]
+    D --> E3["Sources de verite<br/>workspace, tests, CI, docs officielles"]
+    D --> E4["Registre de retention<br/>active, archive, superseded, obsolete"]
+
+    E1 --> F["Filtre et critique<br/>fraicheur, source, score, sensibilite"]
+    E2 --> F
+    E3 --> F
+    E4 --> F
+
+    F --> G{Contexte suffisant et sur ?}
+    G -- Non --> H["Reduire, verifier ou demander<br/>source manquante, risque, question client"]
+    H --> D
+    G -- Oui --> I["Task envelope<br/>mission, contexte minimal, outils, criteres, sortie"]
+
+    I --> J["Subagent specialise<br/>analyste, architecte, design, dev, QA, securite, ops, doc"]
+    J --> K["Handoff packet<br/>resultat, preuves, hypotheses, risques, prochain trigger"]
+    K --> L{Passage d'etape autorise ?}
+
+    L -- Non --> M["Boucle correction<br/>completer contexte, ajuster lot, escalader"]
+    M --> A
+    L -- Oui --> N["Ecriture controlee<br/>Redis, vector DB, Kanban, journal, docs"]
+    N --> P["Knowledge janitor<br/>memoire durable, archive, desindexation, purge"]
+    P --> O([Etape suivante])

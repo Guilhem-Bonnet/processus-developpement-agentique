@@ -1,0 +1,20 @@
+flowchart TD
+    A([Tâche ou carte Kanban]) --> B["Classifier la tâche<br/>rôle, risque, complexité, modalité"]
+    B --> C["Router le LLM<br/>capacité, coût, latence, confidentialité"]
+    C --> D{Modèle autorisé et évalué ?}
+    D -- Non --> E["Fallback ou validation<br/>modèle alternatif, humain, suspension"]
+    E --> C
+    D -- Oui --> F["Récupérer le contexte<br/>sources actives, Redis, vector DB, workspace"]
+
+    F --> G["Filtre fraîcheur et rétention<br/>version, valid_until, superseded_by, sensibilité"]
+    G --> H{Contexte fiable ?}
+    H -- Non --> I["Nettoyer ou demander<br/>désindexer, archiver, relire source, question client"]
+    I --> F
+    H -- Oui --> J["Exécuter avec task envelope<br/>budget, modèle, sources, preuves"]
+
+    J --> K["Handoff packet<br/>résultat, preuves, risques, mémoire candidate"]
+    K --> L{Connaissance durable ?}
+    L -- Oui --> M["Mémoire durable<br/>source, propriétaire, TTL, indexation"]
+    L -- Non --> N["Rétention courte<br/>archive, TTL, purge, non-indexation"]
+    M --> O([Prochaine tâche])
+    N --> O
