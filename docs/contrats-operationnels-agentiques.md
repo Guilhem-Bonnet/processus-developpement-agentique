@@ -11,6 +11,10 @@ Cette page rassemble les contrats d'interface entre les étapes, les agents, les
 | Task envelope | orchestrateur | subagent | déléguer sans bruit. |
 | Handoff packet | subagent | orchestrateur, étape suivante | passer le relais. |
 | Claim ledger | producteur / QA | critique, client, livraison | prouver les affirmations. |
+| Evidence pack | QA / outil / orchestrateur | validateur, client, livraison | regrouper les preuves. |
+| Verification verdict | validateur / QA | orchestrateur, Kanban, client | décider fermeture, réouverture ou incident. |
+| Mission ledger event | orchestrateur / runtime | audit, mémoire, observabilité | tracer transitions et décisions. |
+| Registre des surfaces runtime | orchestrateur / ops | gouvernance, sécurité, mémoire | gouverner prompts, hooks, skills, traces et artefacts. |
 | Registre risques IA | orchestrateur | critique, QA, sécurité | anticiper défauts IA. |
 | Contrat MCP | ops / sécurité | orchestrateur, outils | gouverner intégrations externes. |
 | Dossier d'acceptation | orchestrateur | client | livrer et faire accepter. |
@@ -22,6 +26,11 @@ Cette page rassemble les contrats d'interface entre les étapes, les agents, les
 - [Brief agentique](modeles/brief-agentique.md)
 - [Carte Kanban agentique](modeles/carte-kanban-agentique.md)
 - [Claim ledger](modeles/claim-ledger.md)
+- [Evidence pack](modeles/evidence-pack.md)
+- [Verification verdict](modeles/verification-verdict.md)
+- [Événement de mission ledger](modeles/mission-ledger-event.md)
+- [Registre des surfaces runtime](modeles/registre-surfaces-runtime.md)
+- [Matrice de conformité agentique](modeles/matrice-conformite-agentique.md)
 - [Registre des risques IA](modeles/registre-risques-ia.md)
 - [Dossier d'acceptation](modeles/dossier-acceptation.md)
 - [Rapport d'incident agentique](modeles/incident-agentique.md)

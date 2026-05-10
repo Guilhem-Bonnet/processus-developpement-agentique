@@ -9,6 +9,7 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | Dialogue client | Transformer la demande en besoin testable. | brief, questions ciblées, critères de succès, décisions client |
 | Produit et exigences | Conserver la rigueur du processus humain. | CDC niveaux 0 à 3, user stories, acceptation, NFR |
 | Orchestration agentique | Décider quel rôle agit, avec quel contexte, quels outils et quelles limites. | prompts, skills, subagents, règles, permissions |
+| Runtime agentique | Gouverner les surfaces produites ou modifiées par le système agentique. | agents, skills, hooks, workflows, traces, artefacts, promotion |
 | Contexte et mémoire | Rendre le réel accessible sans halluciner ni surcharger la fenêtre de contexte. | workspace, docs, vector DB, Redis chaud, journal de preuves |
 | Modèles et connaissances | Choisir le bon modèle et gouverner les connaissances indexées ou mémorisées. | routage LLM, fallback, evals modèle, métadonnées, TTL, désindexation, nettoyage |
 | Intégrations et outils | Donner des capacités contrôlées à l'agent. | tool registry, MCP, terminal, navigateur, CI, dépôts, API |
@@ -28,6 +29,10 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | [patterns-structure-agentique.md](patterns-structure-agentique.md) | Formalise les patterns réutilisables et anti-patterns. |
 | [profils-capacites-agentiques.md](profils-capacites-agentiques.md) | Décrit les capacités minimales par rôle, outil, mémoire et validation. |
 | [niveaux-conformite-agentique.md](niveaux-conformite-agentique.md) | Définit les niveaux de maturité et conformité. |
+| [runtime-agentique-et-surfaces-gouvernees.md](runtime-agentique-et-surfaces-gouvernees.md) | Décrit la gouvernance des surfaces runtime, hooks, dynamic factory et drift documentaire. |
+| [ledger-preuves-verdicts-agentiques.md](ledger-preuves-verdicts-agentiques.md) | Formalise mission ledger, evidence pack et verification verdict. |
+| [memoire-hybride-agentique.md](memoire-hybride-agentique.md) | Étend la mémoire vers vectoriel, graphe, sidecar, source registry et memory gate. |
+| [matrice-preuves-conformite-agentique.md](matrice-preuves-conformite-agentique.md) | Relie exigences normatives et preuves attendues. |
 
 ## Composants principaux
 
@@ -35,10 +40,12 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | --- | --- | --- |
 | Orchestrateur | Reçoit la mission, découpe, priorise, délègue et synthétise. | plan court, WIP limité, preuves obligatoires |
 | Policy engine | Décide ce qui est autorisé selon risque, données, coût et périmètre. | allowlist, denylist, validation humaine, sandbox |
+| Runtime surface registry | Inventorie surfaces de contrôle et sorties agentiques. | statut, propriétaire, mode, rétention, preuve |
 | Failure mode registry | Liste les défauts IA plausibles pour une mission et les contrôles associés. | hallucination, surconfiance, oubli, faux Done, critique |
 | Access control | Applique les rôles, scopes, secrets, tenants et permissions par carte. | RBAC/ABAC, minimisation, journal, validation |
 | Validation authority | Définit qui peut accepter, bloquer ou escalader un livrable agentique. | RACI, validateur final, revue croisée, acceptation client |
 | Hook engine | Intercepte les moments critiques du cycle agentique. | pre-tool, post-tool, pre-write, pre-release, stop |
+| Dynamic factory | Crée agents, workflows, skills, hooks ou instructions quand un gap est détecté. | triage durabilité, validation, usage tracking, promotion/purge |
 | Prompt registry | Stocke les instructions stables et contrats de comportement. | versionnement, portée, conflit d'instructions, revue |
 | Model router | Choisit le modèle selon rôle, risque, coût, confidentialité et evals. | routage, fallback, benchmark, seuils, logs coût/latence |
 | Knowledge janitor | Maintient l'hygiène documentaire et évite que le contexte devienne obsolète. | rétention, archive, désindexation, purge, superseded_by |
@@ -51,7 +58,9 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | Redis chaud | Garde l'état court de session, cache sémantique, file d'événements ou contexte actif. | TTL, invalidation, séparation tenant, données sensibles |
 | Base vectorielle | Retrouve connaissances longues par similarité et métadonnées. | embeddings, filtres, top-k, score, provenance, réindexation |
 | Journal de preuves | Trace ce qui a été lu, décidé, exécuté et vérifié. | horodatage, source, résultat, limite, décision |
+| Mission ledger | Journal append-only des missions, tâches, transitions et incidents. | événements, machine d'état, audit, non-répudiation |
 | Claim ledger | Relie chaque affirmation importante à une preuve ou la marque comme hypothèse. | source, résultat d'outil, confiance, limite |
+| Evidence pack | Regroupe preuves atomiques et couverture de critères. | digest, profils de preuve, verdict, décision |
 | Kanban | Rend visibles lots, états, blocages et acceptation. | DoR, DoD, WIP, dépendances, priorité, risque |
 | Subagents | Isolent des travaux spécialisés ou volumineux. | outil limité, prompt spécialisé, résumé, revue croisée |
 | Observabilité | Rend compréhensible le comportement du système agentique. | traces, métriques, logs, coût, latence, taux d'échec |
@@ -192,6 +201,8 @@ MCP sert de passerelle standardisée entre l'agent et les systèmes externes. Il
 | Pre-memory-write | Avant écriture Redis, vector DB ou mémoire | Vérifier source, portée, TTL et absence de secret. | fait non validé, donnée sensible |
 | Pre-index | Avant indexation vectorielle | Vérifier durabilité, sensibilité, owner et métadonnées. | rapport temporaire, source sensible, TTL absent |
 | Scheduled-cleanup | Périodique | Archiver, désindexer ou purger les artefacts périmés. | documents obsolètes, embeddings anciens |
+| Doc-drift-check | Après changement de surface runtime | Détecter divergence docs, manifests, hooks, workflows et mémoire. | doc annonce un comportement absent |
+| Hook-promotion | Avant passage shadow/canary/enforced | Vérifier faux positifs, couverture et risque. | hook nouveau trop bloquant |
 | Pre-stage-transition | Avant passage d'étape | Vérifier DoD, handoff packet et prochain trigger. | preuves absentes, décision client nécessaire |
 | Pre-dry-run | Avant action risquée | Exiger plan, impact, permissions, rollback. | action externe ou irréversible non simulée |
 | Incident-detected | Dès anomalie critique | Stopper, contenir, diagnostiquer et escalader. | faux Done, fuite, action non autorisée |

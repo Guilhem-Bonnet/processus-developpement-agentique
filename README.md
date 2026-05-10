@@ -14,6 +14,10 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 - [Patterns de structure agentique](docs/patterns-structure-agentique.md)
 - [Profils de capacités agentiques](docs/profils-capacites-agentiques.md)
 - [Niveaux de conformité agentique](docs/niveaux-conformite-agentique.md)
+- [Runtime agentique et surfaces gouvernées](docs/runtime-agentique-et-surfaces-gouvernees.md)
+- [Ledger, preuves et verdicts agentiques](docs/ledger-preuves-verdicts-agentiques.md)
+- [Mémoire hybride agentique](docs/memoire-hybride-agentique.md)
+- [Matrice de preuves de conformité agentique](docs/matrice-preuves-conformite-agentique.md)
 - [Cadre agent-utilisateur](docs/cadre-agent-utilisateur.md)
 - [Architecture de pilotage agentique](docs/architecture-pilotage-agentique.md)
 - [Orchestration du contexte agentique](docs/orchestration-contexte-agentique.md)
@@ -35,6 +39,9 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 - [Source Mermaid de l'orchestration](diagrammes/orchestration-agentique.mmd)
 - [Source Mermaid de l'orchestration du contexte](diagrammes/orchestration-contexte-agentique.mmd)
 - [Source Mermaid du routage et de la rétention](diagrammes/routage-retention-connaissances.mmd)
+- [Source Mermaid du runtime agentique](diagrammes/runtime-surfaces-agentiques.mmd)
+- [Source Mermaid du ledger de preuves](diagrammes/ledger-preuves-verdicts.mmd)
+- [Source Mermaid de la mémoire hybride](diagrammes/memoire-hybride-agentique.mmd)
 
 ## Principes
 
@@ -51,6 +58,8 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 11. Les actions risquées passent par une simulation pré-exécution et les incidents agentiques ont un processus de détection, rollback, correction et post-mortem.
 12. Le travail est piloté comme un projet : Kanban, backlog, Definition of Ready, Definition of Done, priorités, dépendances, risques et décisions.
 13. La qualité du livrable ne repose pas sur la confiance dans le modèle, mais sur des preuves : tests, lint, build, rendus, revues, evals, red teaming, logs, SLO et acceptation client.
+14. Les runtimes agentiques ont leurs propres surfaces de contrôle et de sortie : agents, skills, hooks, workflows, preuves, traces et artefacts doivent être versionnés, audités, promus ou purgés.
+15. La conformité agentique se prouve par des artefacts actifs : mission ledger, evidence packs, verification verdicts, registres, manifests, hooks, policies et dossiers d'acceptation.
 
 ## Nature du référentiel
 
@@ -61,6 +70,7 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 | Non-but | imposer un fournisseur, un framework ou un runtime unique. |
 | Vérification | exigences normatives, contrats, preuves et niveaux de conformité. |
 | Évolution | les patterns, exigences et profils peuvent être versionnés comme un référentiel d'architecture. |
+| Inspiration runtime | les patterns éprouvés par des runtimes réels peuvent enrichir le standard sans le rendre dépendant d'un outil. |
 
 ## Vision organisationnelle
 

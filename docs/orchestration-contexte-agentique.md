@@ -149,7 +149,19 @@ Le handoff packet est le paquet de passage de relais. Il évite que chaque étap
 | Réutiliser un pattern | cache court si même session | exemples passés, ADR, incidents, décisions |
 | Réduire les hallucinations | pointer vers sources récentes | fournir candidats sourcés à vérifier |
 
-Redis répond à la question : où en est-on maintenant ? La base vectorielle répond : qu'a-t-on déjà appris qui ressemble à ce cas ? Les sources de vérité répondent : qu'est-ce qui est réellement vrai maintenant ?
+Redis répond à la question : où en est-on maintenant ? La base vectorielle répond : qu'a-t-on déjà appris qui ressemble à ce cas ? Les sources de vérité répondent : qu'est-ce qui est réellement vrai maintenant ? Le graphe de connaissances et le sidecar structuré complètent cette base quand il faut relier décisions, preuves, tâches et validité temporelle.
+
+## Memory gate et source registry
+
+| Décision | Contrôle |
+| --- | --- |
+| Écriture mémoire | source active, portée, sensibilité, TTL, stabilité. |
+| Lecture mémoire | fraîcheur, statut, validité temporelle, contradiction, score. |
+| Indexation | durabilité, non-sensibilité, propriétaire, métadonnées. |
+| Réutilisation critique | retour à la source de vérité ou au dossier de preuve. |
+| Invalidation | source remplacée, incident, secret, release ou décision annulée. |
+
+La mémoire peut proposer un contexte, mais le passage de relais doit citer les sources actives ou les preuves qui justifient son usage.
 
 ## Hooks dédiés au contexte
 

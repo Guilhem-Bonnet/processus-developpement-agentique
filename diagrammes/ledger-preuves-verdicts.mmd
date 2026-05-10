@@ -1,0 +1,11 @@
+flowchart TD
+    A([Mission]) --> B["Mission ledger<br/>events append-only"]
+    B --> C["Task<br/>état, risque, critères"]
+    C --> D["Claim ledger<br/>affirmations critiques"]
+    D --> E["Evidence item<br/>test, log, diff, doc, trace"]
+    E --> F["Evidence pack<br/>preuves groupées, digests, couverture"]
+    F --> G["Verification verdict<br/>passed, failed, skipped"]
+    G --> H{Décision}
+    H -- close --> I([Tâche fermée])
+    H -- reopen --> J([Correction])
+    H -- incident --> K([Incident])

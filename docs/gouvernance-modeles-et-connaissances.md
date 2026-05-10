@@ -1,6 +1,6 @@
 # Gouvernance des modèles et des connaissances
 
-Cette page couvre deux actifs critiques de l'entreprise-agent : les modèles IA utilisés pour agir et les connaissances que le système récupère, mémorise ou oublie. Le flux détaillé de routage LLM et de rétention/nettoyage est décrit dans [routage-llm-retention-connaissances.md](routage-llm-retention-connaissances.md).
+Cette page couvre deux actifs critiques de l'entreprise-agent : les modèles IA utilisés pour agir et les connaissances que le système récupère, mémorise ou oublie. Le flux détaillé de routage LLM et de rétention/nettoyage est décrit dans [routage-llm-retention-connaissances.md](routage-llm-retention-connaissances.md). L'architecture mémoire complète est définie dans [memoire-hybride-agentique.md](memoire-hybride-agentique.md).
 
 ## Gouvernance des modèles
 
@@ -28,6 +28,18 @@ Le routage doit être explicite dans le task envelope dès qu'une tâche dépass
 | Fallback | modèle alternatif, revue humaine ou suspension. |
 | Évaluation | evals passées, seuils et limites connues. |
 | Journalisation | coût, latence, tokens, erreurs, divergence. |
+
+## Statuts et retrait des modèles
+
+| Statut | Comportement attendu |
+| --- | --- |
+| active | utilisable selon politique de routage. |
+| restricted | utilisable seulement pour rôles, données ou environnements autorisés. |
+| deprecated | utilisable temporairement avec fallback cible et plan de migration. |
+| disallowed | rejet obligatoire par pre-model-route ou policy engine. |
+| local_only | utilisable uniquement dans un environnement local ou privé. |
+
+Un modèle retiré ne doit pas rester accessible par fallback implicite. Le retrait exige une preuve de remplacement ou une règle de suspension.
 
 ## Routage de modèles
 
@@ -64,6 +76,19 @@ Le routage doit être explicite dans le task envelope dès qu'une tâche dépass
 | Mise à jour | Réindexer après changement de version, ADR, charte, API ou incident. |
 | Expiration | TTL ou date de revue pour éviter mémoire périmée. |
 | Suppression | Purger secrets, données personnelles inutiles, faits faux ou obsolètes. |
+
+## Mémoire hybride
+
+| Couche | Rôle |
+| --- | --- |
+| Redis chaud | état court, cache, verrou, file d'événements. |
+| Mémoire vectorielle | rappel sémantique de sources durables. |
+| Graphe de connaissances | relations entre missions, tâches, décisions, preuves et sources. |
+| Sidecar structuré | faits temporels, validité, confiance et provenance. |
+| Journal append-only | historique des transitions et décisions. |
+| Source registry | statut actif, archivé, remplacé, obsolète ou sensible. |
+
+Le vectoriel rappelle, le graphe relie, le sidecar qualifie et la source de vérité décide.
 
 ## Rétention et nettoyage documentaire
 

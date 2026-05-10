@@ -1,0 +1,8 @@
+flowchart TD
+    A([Mission agentique]) --> B["Runtime agentique<br/>orchestrateur, subagents, outils"]
+    B --> C["Surfaces de contrôle<br/>prompts, agents, skills, hooks, policies"]
+    B --> D["Surfaces de sortie<br/>plans, preuves, traces, rapports, captures"]
+    C --> E["Gouvernance<br/>version, propriétaire, mode, validation"]
+    D --> F["Rétention<br/>durable, archive, TTL, purge, désindexation"]
+    E --> G["Auditabilité<br/>qui a changé quoi, pourquoi, avec quelle preuve"]
+    F --> G

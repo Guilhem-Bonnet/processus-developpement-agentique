@@ -121,3 +121,83 @@ Cette page décrit les patterns structurants d'une organisation agentique. Chaqu
 | Solution | Capturer prompts, contexte, outils, coûts, latence, erreurs, validations et incidents. |
 | Contrôles | traces, métriques, evals, SLO, post-mortem. |
 | Anti-pattern | Système agentique opaque impossible à auditer. |
+
+## Pattern 13 : Mission ledger append-only
+
+| Élément | Description |
+| --- | --- |
+| Intention | Rendre les missions et transitions auditables. |
+| Problème | Un état courant écrasé ne permet pas de comprendre pourquoi une décision a changé. |
+| Solution | Journaliser missions, tâches, transitions, incidents et preuves comme événements append-only. |
+| Contrôles | machine d'état, actor_id, timestamp, payload, lien evidence/verdict. |
+| Anti-pattern | Modifier silencieusement le statut d'une tâche sans événement. |
+
+## Pattern 14 : Evidence pack et verification verdict
+
+| Élément | Description |
+| --- | --- |
+| Intention | Transformer le Done en décision vérifiable. |
+| Problème | Les preuves existent mais restent dispersées entre logs, tests, captures et rapports. |
+| Solution | Regrouper les preuves dans un evidence pack, puis produire un verdict de vérification. |
+| Contrôles | digest, couverture des critères, profil de preuve, décision close/reopen/incident. |
+| Anti-pattern | Fermer une tâche parce qu'un test a été lancé sans relier le résultat aux critères. |
+
+## Pattern 15 : Hook lifecycle progressif
+
+| Élément | Description |
+| --- | --- |
+| Intention | Déployer les garde-fous sans casser le flux de travail. |
+| Problème | Un hook nouveau peut bloquer trop large ou manquer des cas critiques. |
+| Solution | Promouvoir les hooks par modes `shadow`, `canary`, puis `enforced`. |
+| Contrôles | registre des hooks, digest de validation, faux positifs, procédure de retrait. |
+| Anti-pattern | Activer un blocage global sans période d'observation. |
+
+## Pattern 16 : Dynamic factory contrôlée
+
+| Élément | Description |
+| --- | --- |
+| Intention | Créer de nouvelles capacités sans prolifération incontrôlée. |
+| Problème | Agents, skills et workflows dynamiques peuvent devenir une dette invisible. |
+| Solution | Détecter le gap, classer l'artefact, décider éphémère/permanent, valider puis promouvoir ou purger. |
+| Contrôles | usage tracking, expiration, score de durabilité, review, registre. |
+| Anti-pattern | Créer un agent permanent pour chaque demande ponctuelle. |
+
+## Pattern 17 : Mémoire hybride
+
+| Élément | Description |
+| --- | --- |
+| Intention | Combiner rappel sémantique, relations et faits temporels. |
+| Problème | Une vector DB seule rappelle des textes similaires sans comprendre validité ni dépendances. |
+| Solution | Associer vectoriel, graphe, sidecar structuré, journal et sources de vérité. |
+| Contrôles | source registry, memory gate, valid_from/valid_to, désindexation. |
+| Anti-pattern | Traiter le résultat vectoriel comme une vérité. |
+
+## Pattern 18 : Runtime output governance
+
+| Élément | Description |
+| --- | --- |
+| Intention | Gouverner les artefacts produits par le runtime agentique. |
+| Problème | Plans, traces, rapports, captures et sorties temporaires s'accumulent sans statut. |
+| Solution | Déclarer type, propriétaire, sensibilité, rétention, indexation et statut. |
+| Contrôles | registre de surfaces runtime, cleanup, doc drift, audit périodique. |
+| Anti-pattern | Laisser les sorties runtime devenir une documentation parallèle non fiable. |
+
+## Pattern 19 : Doc drift detector
+
+| Élément | Description |
+| --- | --- |
+| Intention | Empêcher la divergence entre documentation, manifests, hooks, workflows et mémoire. |
+| Problème | Le runtime évolue plus vite que le standard documentaire, ou inversement. |
+| Solution | Comparer surfaces déclarées, fichiers réels, registres, sources actives et preuves de workflow. |
+| Contrôles | hook doc-drift-check, release gate, rapport de drift, owner de correction. |
+| Anti-pattern | Considérer la documentation comme vraie sans vérifier le runtime. |
+
+## Pattern 20 : Model retirement guard
+
+| Élément | Description |
+| --- | --- |
+| Intention | Retirer ou restreindre un modèle sans casser l'orchestration. |
+| Problème | Un modèle obsolète peut rester utilisé par habitude ou fallback implicite. |
+| Solution | Maintenir statuts active, restricted, deprecated, disallowed et local_only avec fallback explicite. |
+| Contrôles | policy de routage, pre-model-route, eval de remplacement, journal d'appel. |
+| Anti-pattern | Laisser un modèle interdit accessible parce qu'il fonctionne encore. |

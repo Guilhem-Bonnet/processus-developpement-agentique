@@ -21,6 +21,7 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-ORC-003 | Tout subagent DOIT produire un handoff packet structuré. | obligatoire |
 | AG-ORC-004 | L'orchestrateur DOIT limiter le WIP et éviter les délégations ouvertes. | obligatoire |
 | AG-ORC-005 | Les communications inter-agents DOIVENT être tracées si elles influencent une décision. | obligatoire |
+| AG-ORC-006 | Les transitions de mission ou de tâche DEVRAIENT être journalisées dans un ledger append-only. | recommandé |
 
 ## Contexte et mémoire
 
@@ -32,6 +33,8 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-CTX-004 | Le contexte chaud DOIT avoir un TTL et une portée de mission. | obligatoire |
 | AG-CTX-005 | Toute source obsolète, remplacée ou sensible DOIT être bloquée ou désindexée. | obligatoire |
 | AG-CTX-006 | Une mémoire durable DOIT être stable, sourcée, non sensible ou minimisée. | obligatoire |
+| AG-CTX-007 | Une mémoire mature DEVRAIT distinguer rappel vectoriel, graphe relationnel, faits temporels et sources de vérité. | recommandé |
+| AG-CTX-008 | Toute lecture mémoire critique DOIT vérifier statut, validité et source active. | obligatoire |
 
 ## Modèles LLM
 
@@ -42,6 +45,7 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-LLM-003 | Un modèle utilisé pour décision durable DEVRAIT avoir des evals représentatives. | recommandé |
 | AG-LLM-004 | Les appels modèle DOIVENT être journalisés au niveau nécessaire : modèle, rôle, coût, latence, erreur. | obligatoire |
 | AG-LLM-005 | Les données sensibles NE DOIVENT PAS être transmises à un modèle non autorisé. | obligatoire |
+| AG-LLM-006 | Les modèles dépréciés ou interdits DOIVENT déclencher un fallback ou un rejet. | obligatoire |
 
 ## Outils et intégrations
 
@@ -52,6 +56,8 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-TOL-003 | Les intégrations MCP DOIVENT définir propriétaire, scopes, timeout et journalisation. | obligatoire |
 | AG-TOL-004 | Les secrets NE DOIVENT PAS être exposés dans prompts, logs, traces ou mémoires. | obligatoire |
 | AG-TOL-005 | Les erreurs d'outil DOIVENT être capturées comme preuves ou incidents selon gravité. | obligatoire |
+| AG-TOL-006 | Les hooks DEVRAIENT avoir un cycle de promotion shadow, canary, enforced ou équivalent. | recommandé |
+| AG-TOL-007 | Les surfaces runtime de contrôle DOIVENT avoir propriétaire, statut, mode et preuve de validation. | obligatoire |
 
 ## Qualité, preuves et validation
 
@@ -62,6 +68,8 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-QUA-003 | Les livrables métier DOIVENT pouvoir être acceptés ou refusés par le client. | obligatoire |
 | AG-QUA-004 | Les domaines sécurité, architecture, UX et ops DOIVENT avoir des validateurs identifiés si concernés. | obligatoire |
 | AG-QUA-005 | Les défauts IA plausibles DOIVENT être anticipés sur les cartes non triviales. | obligatoire |
+| AG-QUA-006 | Les preuves critiques DEVRAIENT être groupées dans un evidence pack ou équivalent. | recommandé |
+| AG-QUA-007 | Un verdict de vérification DOIT décider fermeture, réouverture, incident ou escalade pour les tâches à risque. | obligatoire |
 
 ## Incidents et amélioration
 
@@ -81,3 +89,15 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-RET-003 | Les sources remplacées DOIVENT pointer vers leur remplacement. | obligatoire |
 | AG-RET-004 | Un nettoyage périodique DOIT vérifier TTL, doublons, obsolescence et données sensibles. | obligatoire |
 | AG-RET-005 | Une mémoire fausse ou contaminée DOIT être purgée et suivie comme incident. | obligatoire |
+| AG-RET-006 | Les surfaces de sortie runtime DOIVENT avoir une règle de rétention et un statut d'indexation. | obligatoire |
+| AG-RET-007 | La dérive entre documentation, manifests, runtime et mémoire DEVRAIT être détectée périodiquement. | recommandé |
+
+## Capacités dynamiques
+
+| ID | Exigence | Niveau |
+| --- | --- | --- |
+| AG-DYN-001 | Toute création dynamique d'agent, skill, workflow, hook ou instruction DOIT répondre à un gap identifié. | obligatoire |
+| AG-DYN-002 | Tout artefact dynamique DOIT être classé éphémère ou permanent. | obligatoire |
+| AG-DYN-003 | Un artefact éphémère DOIT avoir une règle d'expiration ou de purge. | obligatoire |
+| AG-DYN-004 | La promotion vers durable DOIT être justifiée par usage, valeur et validation. | obligatoire |
+| AG-DYN-005 | Les artefacts dynamiques DOIVENT être inscrits dans un registre s'ils influencent l'orchestration. | obligatoire |

@@ -74,6 +74,18 @@ Le routage LLM évite deux dérives : utiliser un modèle trop faible pour une d
 | Contexte trop long | résumer avec sources, découper la tâche ou augmenter budget avec justification. |
 | Modèle indisponible | fallback prévu, mode dégradé ou suspension. |
 
+## Model retirement guard
+
+| Statut modèle | Règle de routage |
+| --- | --- |
+| active | routable selon tâche, risque et confidentialité. |
+| restricted | routable seulement si la carte satisfait les contraintes. |
+| deprecated | routable temporairement avec fallback cible et trace de migration. |
+| disallowed | non routable, fallback ou suspension obligatoire. |
+| local_only | routable uniquement avec contexte local ou privé. |
+
+Le model router doit échouer fermé quand un modèle devient interdit. Une carte ne doit pas contourner ce statut par un alias, un fallback implicite ou une configuration locale non déclarée.
+
 ## Rétention des connaissances
 
 Tout artefact doit avoir une destination : source de vérité active, mémoire durable, archive, rétention courte ou purge. L'absence de politique crée une dette documentaire et pollue les recherches futures.
@@ -92,6 +104,9 @@ Tout artefact doit avoir une destination : source de vérité active, mémoire d
 | Rapport remplacé | archive | non sauf valeur historique | marquer superseded_by |
 | Donnée sensible | minimiser | non par défaut | purge ou procédure dédiée |
 | Mémoire fausse | aucune | désindexer | correction + invalidation |
+| Artefact runtime dynamique | court terme par défaut | non par défaut | promotion ou purge après usage |
+| Evidence pack | projet à durable selon criticité | résumé seulement | archiver avec digest |
+| Verification verdict | durable si fermeture critique | oui si sourcé | remplacer seulement par nouveau verdict |
 
 ## Statuts de connaissance
 

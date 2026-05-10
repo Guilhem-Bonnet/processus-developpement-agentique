@@ -1,0 +1,12 @@
+flowchart TD
+    A([Action agentique]) --> B["Contexte chaud<br/>session, cache, état court"]
+    A --> C["Mémoire vectorielle<br/>similarité, rappel long terme"]
+    A --> D["Graphe de connaissances<br/>relations, dépendances, provenance"]
+    A --> E["Sidecar structuré<br/>faits temporels, journaux agents"]
+    A --> F["Sources de vérité<br/>workspace, docs, tests, décisions"]
+    B --> G["Context router"]
+    C --> G
+    D --> G
+    E --> G
+    F --> G
+    G --> H["Contexte minimal vérifié"]
