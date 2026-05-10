@@ -1,6 +1,6 @@
 # Architecture de pilotage agentique
 
-L'architecture de pilotage décrit comment l'entreprise-agent travaille sans réduire le projet à une conversation. Elle sépare les plans de responsabilité : besoin client, contexte, orchestration, outils, qualité, livraison et apprentissage.
+L'architecture de pilotage décrit comment l'entreprise-agent travaille sans réduire le projet à une conversation. Elle sépare les plans de responsabilité : besoin client, contexte, orchestration, outils, qualité, livraison et apprentissage. Le modèle normatif global est défini dans [modele-reference-structure-agentique.md](modele-reference-structure-agentique.md), avec les exigences associées dans [exigences-normatives-structure-agentique.md](exigences-normatives-structure-agentique.md).
 
 ## Plans d'architecture
 
@@ -17,6 +17,17 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | Gouvernance d'exécution | Savoir qui agit, avec quel accès, quel coût de contexte et quel validateur. | matrice d'accès, RACI, Kanban enrichi, budget tokens, revues croisées |
 | Défauts IA | Rendre visibles et récupérables les erreurs natives du modèle. | registre défauts IA, claim ledger, subagent critique, disconfirmation |
 | Livraison et suivi | Rendre le travail visible, acceptable et améliorable. | Kanban, dossier de livraison, monitoring, backlog d'amélioration |
+
+## Position dans le standard
+
+| Document | Rôle |
+| --- | --- |
+| [terminologie-agentique.md](terminologie-agentique.md) | Définit le vocabulaire stable et le langage normatif. |
+| [modele-reference-structure-agentique.md](modele-reference-structure-agentique.md) | Décrit les plans, composants obligatoires et interfaces minimales. |
+| [exigences-normatives-structure-agentique.md](exigences-normatives-structure-agentique.md) | Liste les exigences vérifiables par domaine. |
+| [patterns-structure-agentique.md](patterns-structure-agentique.md) | Formalise les patterns réutilisables et anti-patterns. |
+| [profils-capacites-agentiques.md](profils-capacites-agentiques.md) | Décrit les capacités minimales par rôle, outil, mémoire et validation. |
+| [niveaux-conformite-agentique.md](niveaux-conformite-agentique.md) | Définit les niveaux de maturité et conformité. |
 
 ## Composants principaux
 

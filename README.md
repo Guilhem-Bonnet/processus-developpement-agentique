@@ -1,13 +1,19 @@
-# Processus de développement agentique
+# Standard de structure agentique
 
-Ce projet documente un processus de développement où l'agent devient l'entreprise opératrice et l'utilisateur devient le client. Le client apporte le besoin, le contexte métier, les arbitrages et l'acceptation. L'entreprise-agent organise la découverte, le cadrage, l'architecture, l'exécution, la qualité, la sécurité, la traçabilité et la livraison au moyen de prompts, skills, outils, MCP, hooks, mémoire, Kanban et subagents.
+Ce projet documente la base d'une structure agentique fonctionnelle, sous une forme proche d'un standard, d'un référentiel d'architecture et d'un catalogue de design patterns. L'agent devient l'entreprise opératrice et l'utilisateur devient le client. Le client apporte le besoin, le contexte métier, les arbitrages et l'acceptation. L'entreprise-agent organise la découverte, le cadrage, l'architecture, l'exécution, la qualité, la sécurité, la traçabilité et la livraison au moyen de prompts, skills, outils, MCP, hooks, mémoire, Kanban et subagents.
 
-Cette version ne remplace pas le processus humain : elle le fusionne avec un dispositif agentique. Le besoin reste traité avec la même rigueur qu'un projet logiciel classique, mais l'exécution est pilotée par une organisation d'agents outillés, gouvernée par des garde-fous et des preuves.
+Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle définit les éléments constitutifs, exigences, interfaces, niveaux de conformité et patterns nécessaires pour concevoir une structure agentique gouvernable, vérifiable et maintenable.
 
 ## Contenu
 
 - [Diagramme de décision agentique](docs/diagramme-decision-agentique.md)
 - [Diagramme d'orchestration interne](docs/diagramme-orchestration-agentique.md)
+- [Terminologie agentique](docs/terminologie-agentique.md)
+- [Modèle de référence d'une structure agentique](docs/modele-reference-structure-agentique.md)
+- [Exigences normatives d'une structure agentique](docs/exigences-normatives-structure-agentique.md)
+- [Patterns de structure agentique](docs/patterns-structure-agentique.md)
+- [Profils de capacités agentiques](docs/profils-capacites-agentiques.md)
+- [Niveaux de conformité agentique](docs/niveaux-conformite-agentique.md)
 - [Cadre agent-utilisateur](docs/cadre-agent-utilisateur.md)
 - [Architecture de pilotage agentique](docs/architecture-pilotage-agentique.md)
 - [Orchestration du contexte agentique](docs/orchestration-contexte-agentique.md)
@@ -45,6 +51,16 @@ Cette version ne remplace pas le processus humain : elle le fusionne avec un dis
 11. Les actions risquées passent par une simulation pré-exécution et les incidents agentiques ont un processus de détection, rollback, correction et post-mortem.
 12. Le travail est piloté comme un projet : Kanban, backlog, Definition of Ready, Definition of Done, priorités, dépendances, risques et décisions.
 13. La qualité du livrable ne repose pas sur la confiance dans le modèle, mais sur des preuves : tests, lint, build, rendus, revues, evals, red teaming, logs, SLO et acceptation client.
+
+## Nature du référentiel
+
+| Aspect | Position |
+| --- | --- |
+| Type | standard documentaire, modèle de référence et catalogue de patterns. |
+| But | définir la base commune d'une structure agentique qui fonctionne. |
+| Non-but | imposer un fournisseur, un framework ou un runtime unique. |
+| Vérification | exigences normatives, contrats, preuves et niveaux de conformité. |
+| Évolution | les patterns, exigences et profils peuvent être versionnés comme un référentiel d'architecture. |
 
 ## Vision organisationnelle
 

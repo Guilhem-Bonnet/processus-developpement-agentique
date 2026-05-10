@@ -1,6 +1,6 @@
 # Contrats opérationnels agentiques
 
-Cette page rassemble les contrats d'interface entre les étapes, les agents, les outils et le client. Le but est de rendre l'entreprise-agent composable : chaque rôle sait ce qu'il reçoit, ce qu'il produit et qui peut valider.
+Cette page rassemble les contrats d'interface entre les étapes, les agents, les outils et le client. Le but est de rendre l'entreprise-agent composable : chaque rôle sait ce qu'il reçoit, ce qu'il produit et qui peut valider. Ces contrats opérationnalisent les exigences du [modèle de référence](modele-reference-structure-agentique.md) et des [exigences normatives](exigences-normatives-structure-agentique.md).
 
 ## Contrats principaux
 
