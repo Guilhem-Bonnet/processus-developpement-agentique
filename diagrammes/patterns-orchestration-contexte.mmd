@@ -1,0 +1,10 @@
+flowchart TD
+    A["ORC-01 Orchestrateur et subagents"] --> B["ORC-02 Task envelope"]
+    B --> C["ORC-03 Handoff packet"]
+    D["ORC-04 Context router"] --> E["ORC-05 Orchestrateur de contexte avancé"]
+    F["ORC-06 Context constitution"] --> E
+    G["ORC-07 Context conflict resolver"] --> E
+    H["ORC-08 Context budget escalation"] --> E
+    E --> I["Context pack"]
+    I --> B
+    C --> J["Transition ou correction"]

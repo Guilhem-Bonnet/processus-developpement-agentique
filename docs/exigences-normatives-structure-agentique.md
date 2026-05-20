@@ -35,6 +35,10 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-CTX-006 | Une mémoire durable DOIT être stable, sourcée, non sensible ou minimisée. | obligatoire |
 | AG-CTX-007 | Une mémoire mature DEVRAIT distinguer rappel vectoriel, graphe relationnel, faits temporels et sources de vérité. | recommandé |
 | AG-CTX-008 | Toute lecture mémoire critique DOIT vérifier statut, validité et source active. | obligatoire |
+| AG-CTX-009 | Une structure avancée DEVRAIT disposer d'un orchestrateur de contexte qui arbitre profils, budgets, sources, exclusions et persistance. | recommandé |
+| AG-CTX-010 | Tout context pack transmis à un subagent DOIT identifier sources incluses, sources exclues, contraintes et niveau de confiance si la tâche est à risque. | obligatoire |
+| AG-CTX-011 | Toute contradiction entre sources critiques DOIT être résolue, portée comme hypothèse ou escaladée avant décision durable. | obligatoire |
+| AG-CTX-012 | Toute augmentation de budget de contexte DEVRAIT être justifiée par insuffisance, risque ou preuve de contradiction. | recommandé |
 
 ## Modèles LLM
 
@@ -70,6 +74,7 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-QUA-005 | Les défauts IA plausibles DOIVENT être anticipés sur les cartes non triviales. | obligatoire |
 | AG-QUA-006 | Les preuves critiques DEVRAIENT être groupées dans un evidence pack ou équivalent. | recommandé |
 | AG-QUA-007 | Un verdict de vérification DOIT décider fermeture, réouverture, incident ou escalade pour les tâches à risque. | obligatoire |
+| AG-QUA-008 | Toute transition d'étape à risque DOIT être conditionnée par une preuve proportionnée et un trigger explicite. | obligatoire |
 
 ## Incidents et amélioration
 
@@ -79,6 +84,7 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-INC-002 | Tout incident DOIT définir containment, correction, mémoire à purger et prévention. | obligatoire |
 | AG-INC-003 | Les incidents récurrents DOIVENT alimenter evals, hooks ou règles de gouvernance. | obligatoire |
 | AG-INC-004 | Les métriques de coût, latence, rework, faux Done et validation DEVRAIENT être suivies. | recommandé |
+| AG-INC-005 | Toute mémoire contaminée DOIT déclencher invalidation, purge ou correction des sources et caches impactés. | obligatoire |
 
 ## Rétention et soutenabilité
 
@@ -91,6 +97,7 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-RET-005 | Une mémoire fausse ou contaminée DOIT être purgée et suivie comme incident. | obligatoire |
 | AG-RET-006 | Les surfaces de sortie runtime DOIVENT avoir une règle de rétention et un statut d'indexation. | obligatoire |
 | AG-RET-007 | La dérive entre documentation, manifests, runtime et mémoire DEVRAIT être détectée périodiquement. | recommandé |
+| AG-RET-008 | Toute promotion en mémoire durable DOIT être justifiée par stabilité, source, réutilité, sensibilité, propriétaire et expiration. | obligatoire |
 
 ## Capacités dynamiques
 
@@ -101,3 +108,12 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-DYN-003 | Un artefact éphémère DOIT avoir une règle d'expiration ou de purge. | obligatoire |
 | AG-DYN-004 | La promotion vers durable DOIT être justifiée par usage, valeur et validation. | obligatoire |
 | AG-DYN-005 | Les artefacts dynamiques DOIVENT être inscrits dans un registre s'ils influencent l'orchestration. | obligatoire |
+
+## Patterns et maturité
+
+| ID | Exigence | Niveau |
+| --- | --- | --- |
+| AG-PAT-001 | Tout pattern normatif DOIT avoir intention, problème, solution, contrôles et anti-pattern. | obligatoire |
+| AG-PAT-002 | Tout pattern normatif DOIT être relié à au moins une exigence et une preuve attendue. | obligatoire |
+| AG-PAT-003 | Tout pattern DEVRAIT avoir un statut de lifecycle et un niveau de maturité. | recommandé |
+| AG-PAT-004 | Tout pattern déprécié DOIT pointer vers son remplacement ou sa raison de retrait. | obligatoire |

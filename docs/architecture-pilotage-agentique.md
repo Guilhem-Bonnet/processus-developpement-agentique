@@ -10,7 +10,7 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | Produit et exigences | Conserver la rigueur du processus humain. | CDC niveaux 0 à 3, user stories, acceptation, NFR |
 | Orchestration agentique | Décider quel rôle agit, avec quel contexte, quels outils et quelles limites. | prompts, skills, subagents, règles, permissions |
 | Runtime agentique | Gouverner les surfaces produites ou modifiées par le système agentique. | agents, skills, hooks, workflows, traces, artefacts, promotion |
-| Contexte et mémoire | Rendre le réel accessible sans halluciner ni surcharger la fenêtre de contexte. | workspace, docs, vector DB, Redis chaud, journal de preuves |
+| Contexte et mémoire | Rendre le réel accessible sans halluciner ni surcharger la fenêtre de contexte. | workspace, docs, vector DB, Redis chaud, graphe, context pack, journal de preuves |
 | Modèles et connaissances | Choisir le bon modèle et gouverner les connaissances indexées ou mémorisées. | routage LLM, fallback, evals modèle, métadonnées, TTL, désindexation, nettoyage |
 | Intégrations et outils | Donner des capacités contrôlées à l'agent. | tool registry, MCP, terminal, navigateur, CI, dépôts, API |
 | Qualité et sécurité | Bloquer les dérives et prouver le résultat. | hooks, tests, lint, build, scans, evals, red teaming, revues |
@@ -26,7 +26,7 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | [terminologie-agentique.md](terminologie-agentique.md) | Définit le vocabulaire stable et le langage normatif. |
 | [modele-reference-structure-agentique.md](modele-reference-structure-agentique.md) | Décrit les plans, composants obligatoires et interfaces minimales. |
 | [exigences-normatives-structure-agentique.md](exigences-normatives-structure-agentique.md) | Liste les exigences vérifiables par domaine. |
-| [patterns-structure-agentique.md](patterns-structure-agentique.md) | Formalise les patterns réutilisables et anti-patterns. |
+| [patterns/README.md](patterns/README.md) | Classe les patterns réutilisables et anti-patterns par famille. |
 | [profils-capacites-agentiques.md](profils-capacites-agentiques.md) | Décrit les capacités minimales par rôle, outil, mémoire et validation. |
 | [niveaux-conformite-agentique.md](niveaux-conformite-agentique.md) | Définit les niveaux de maturité et conformité. |
 | [runtime-agentique-et-surfaces-gouvernees.md](runtime-agentique-et-surfaces-gouvernees.md) | Décrit la gouvernance des surfaces runtime, hooks, dynamic factory et drift documentaire. |
@@ -52,7 +52,7 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | Skills registry | Fournit des procédures réutilisables par domaine. | préconditions, sorties attendues, tests de compétence |
 | Tool registry | Liste les outils disponibles et leur niveau de risque. | permission, audit, masquage secrets, quotas |
 | MCP gateway | Connecte l'agent à des outils, données et workflows externes via un protocole standard. | serveur autorisé, scopes, logs, timeout, erreurs |
-| Context orchestration layer | Ajuste la taille du contexte selon l'étape et prépare les délégations. | profil de contexte, budget, task envelope, handoff packet |
+| Orchestrateur de contexte avancé | Arbitre profils, budgets, couches mémoire, exclusions et persistance. | context pack, scorecard, task envelope, handoff packet |
 | Token economy | Réduit coût, bruit et saturation par budget, cache, compression et handoff. | budgets, TTL, résumé sourcé, métriques coût/latence |
 | Context router | Sélectionne le contexte pertinent avant action. | source, fraîcheur, confiance, taille, priorité |
 | Redis chaud | Garde l'état court de session, cache sémantique, file d'événements ou contexte actif. | TTL, invalidation, séparation tenant, données sensibles |

@@ -1,0 +1,10 @@
+flowchart TD
+    A["KNO-02 Mémoire hybride"] --> B["Source registry"]
+    A --> C["Vectoriel"]
+    A --> D["Graphe"]
+    A --> E["Sidecar structuré"]
+    F["KNO-01 Knowledge janitor"] --> A
+    G["KNO-04 Knowledge promotion"] --> A
+    H["KNO-05 Memory contamination response"] --> F
+    I["KNO-03 Doc drift detector"] --> F
+    B --> J["Context pack vérifié"]

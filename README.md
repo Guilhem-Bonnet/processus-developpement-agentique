@@ -11,7 +11,12 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 - [Terminologie agentique](docs/terminologie-agentique.md)
 - [Modèle de référence d'une structure agentique](docs/modele-reference-structure-agentique.md)
 - [Exigences normatives d'une structure agentique](docs/exigences-normatives-structure-agentique.md)
-- [Patterns de structure agentique](docs/patterns-structure-agentique.md)
+- [Catalogue des patterns agentiques](docs/patterns/README.md)
+- [Relations entre patterns agentiques](docs/patterns/relations-patterns.md)
+- [Matrice patterns, exigences et preuves](docs/patterns/matrice-patterns-exigences-preuves.md)
+- [Contrats formels agentiques](docs/patterns/contrats-formels-agentiques.md)
+- [Lifecycle et maturité des patterns](docs/patterns/lifecycle-maturite-patterns.md)
+- [Anti-patterns agentiques](docs/patterns/anti-patterns-agentiques.md)
 - [Profils de capacités agentiques](docs/profils-capacites-agentiques.md)
 - [Niveaux de conformité agentique](docs/niveaux-conformite-agentique.md)
 - [Runtime agentique et surfaces gouvernées](docs/runtime-agentique-et-surfaces-gouvernees.md)
@@ -42,6 +47,12 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 - [Source Mermaid du runtime agentique](diagrammes/runtime-surfaces-agentiques.mmd)
 - [Source Mermaid du ledger de preuves](diagrammes/ledger-preuves-verdicts.mmd)
 - [Source Mermaid de la mémoire hybride](diagrammes/memoire-hybride-agentique.mmd)
+- [Source Mermaid des patterns organisationnels](diagrammes/patterns-organisation.mmd)
+- [Source Mermaid des patterns d'orchestration et contexte](diagrammes/patterns-orchestration-contexte.mmd)
+- [Source Mermaid des patterns de gouvernance](diagrammes/patterns-gouvernance-controles.mmd)
+- [Source Mermaid des patterns de preuves et qualité](diagrammes/patterns-preuves-qualite.mmd)
+- [Source Mermaid des patterns de mémoire et connaissances](diagrammes/patterns-memoire-connaissances.mmd)
+- [Source Mermaid des patterns runtime et évolution](diagrammes/patterns-runtime-evolution.mmd)
 
 ## Principes
 

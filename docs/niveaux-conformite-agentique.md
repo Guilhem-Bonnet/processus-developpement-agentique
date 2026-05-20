@@ -50,11 +50,12 @@ Cette page propose une échelle de conformité pour évaluer une structure agent
 | Exigence | Attendu |
 | --- | --- |
 | Subagents | rôles spécialisés avec prompts, outils et sorties. |
-| Contexte | context router, budgets et sources par rôle. |
+| Contexte | context router, context pack, budgets et sources par rôle. |
 | Modèles | model router, fallback, coûts et confidentialité. |
 | Communication | consultations inter-agents tracées. |
 | Ledger | événements de mission et transitions critiques tracés. |
 | Handoffs | passage d'étape basé sur preuves et DoD. |
+| Patterns | catalogue classé avec relations principales. |
 
 ## Niveau 4 : gouverné
 
@@ -66,6 +67,7 @@ Cette page propose une échelle de conformité pour évaluer une structure agent
 | Rétention | politique durable/archive/TTL/désindexation/purge. |
 | Surfaces runtime | registre des prompts, agents, skills, hooks, workflows et artefacts de sortie. |
 | Autorités | RACI et validateurs par domaine. |
+| Patterns | lifecycle, maturité et matrice patterns-exigences-preuves. |
 
 ## Niveau 5 : mature
 
@@ -78,6 +80,7 @@ Cette page propose une échelle de conformité pour évaluer une structure agent
 | Résilience | fallback modèles/outils, modes dégradés, reprise contrôlée. |
 | Hygiène mémoire | audits périodiques du corpus, embeddings, graphe, sources et connaissances durables. |
 | Drift documentaire | détection entre docs, manifests, runtime, workflows et mémoire. |
+| Patterns | promotion, dépréciation et amélioration des patterns par preuves et incidents. |
 
 ## Règles de conformité
 
@@ -94,6 +97,7 @@ Cette page propose une échelle de conformité pour évaluer une structure agent
 | Mission structurée | oui | oui | oui | oui | oui |
 | Kanban agentique | oui | oui | oui | oui | oui |
 | Task envelope | oui | oui | oui | oui | oui |
+| Context pack | non requis | partiel | oui | oui | oui |
 | Evidence pack/verdict | partiel | partiel | oui | oui | oui |
 | Mission ledger | non requis | partiel | oui | oui | oui |
 | Permissions outils | non requis | oui | oui | oui | oui |
@@ -101,6 +105,7 @@ Cette page propose une échelle de conformité pour évaluer une structure agent
 | Hook lifecycle | non requis | partiel | oui | oui | oui |
 | Subagents spécialisés | non requis | partiel | oui | oui | oui |
 | Context router | non requis | partiel | oui | oui | oui |
+| Orchestrateur de contexte avancé | non requis | non requis | partiel | oui | oui |
 | Mémoire hybride | non requis | non requis | partiel | oui | oui |
 | Model router | non requis | partiel | oui | oui | oui |
 | Evals et SLO | non requis | non requis | partiel | oui | oui |
@@ -108,5 +113,7 @@ Cette page propose une échelle de conformité pour évaluer une structure agent
 | Rétention et nettoyage | non requis | partiel | partiel | oui | oui |
 | Surfaces runtime gouvernées | non requis | partiel | partiel | oui | oui |
 | Matrice preuves/conformité | non requis | non requis | partiel | oui | oui |
+| Matrice patterns/exigences/preuves | non requis | non requis | partiel | oui | oui |
+| Lifecycle des patterns | non requis | non requis | partiel | oui | oui |
 | Doc drift detector | non requis | non requis | non requis | partiel | oui |
 | Observabilité complète | non requis | non requis | partiel | partiel | oui |

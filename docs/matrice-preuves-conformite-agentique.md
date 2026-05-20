@@ -12,12 +12,13 @@ Toute exigence normative DOIT pouvoir pointer vers au moins une preuve attendue 
 | --- | --- | --- |
 | Mission | AG-MIS | brief, mission ledger, carte Kanban, critères d'acceptation. |
 | Orchestration | AG-ORC | task envelope, handoff packet, workflow, trace de délégation. |
-| Contexte | AG-CTX | context profile, source registry, logs de récupération, metadata de fraîcheur. |
+| Contexte | AG-CTX | context profile, context pack, source registry, logs de récupération, metadata de fraîcheur. |
 | Modèles | AG-LLM | politique de routage, fallback, evals modèle, journal d'appel. |
 | Outils | AG-TOL | tool registry, policy request, MCP contract, hook pre-tool. |
 | Qualité | AG-QUA | claim ledger, evidence pack, verification verdict, dossier d'acceptation. |
 | Incidents | AG-INC | rapport incident, rollback, purge mémoire, post-mortem, eval de prévention. |
 | Rétention | AG-RET | registre de rétention, TTL, archive, désindexation, cleanup report. |
+| Patterns | AG-PAT | catalogue de patterns, lifecycle, matrice patterns-exigences-preuves, preuves d'usage. |
 
 ## Statuts de conformité
 
@@ -55,6 +56,8 @@ Toute exigence normative DOIT pouvoir pointer vers au moins une preuve attendue 
 | Mission ledger | mission, tâche, transition, incident. |
 | Evidence pack | preuves typées et couverture. |
 | Verification verdict | décision de fermeture ou réouverture. |
+| Context pack | sources incluses/exclues, scorecard, contraintes et confiance. |
+| Pattern matrix | lien entre patterns, exigences et preuves. |
 | Memory audit | obsolescence, secrets, désindexation. |
 | Retention registry | destination durable, archive, TTL ou purge. |
 | Acceptance dossier | acceptation client et risques résiduels. |

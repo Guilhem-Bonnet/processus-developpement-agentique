@@ -1,0 +1,8 @@
+flowchart TD
+    A["RUN-01 Dynamic factory contrôlée"] --> B["Agent / skill / workflow / hook"]
+    B --> C{"Éphémère ou permanent ?"}
+    C -- "éphémère" --> D["TTL / purge"]
+    C -- "permanent" --> E["Validation / promotion"]
+    E --> F["RUN-02 Runtime output governance"]
+    F --> G["Registre surfaces runtime"]
+    F --> H["Rétention / indexation / audit"]

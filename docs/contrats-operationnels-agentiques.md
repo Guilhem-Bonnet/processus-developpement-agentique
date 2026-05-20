@@ -8,6 +8,7 @@ Cette page rassemble les contrats d'interface entre les étapes, les agents, les
 | --- | --- | --- | --- |
 | Brief agentique | client / orchestrateur | analyste, orchestrateur | démarrer une mission. |
 | Carte Kanban agentique | orchestrateur | subagents, client, QA | piloter un lot. |
+| Context pack | orchestrateur de contexte | subagents, QA, sécurité | transmettre un contexte vérifié et limité. |
 | Task envelope | orchestrateur | subagent | déléguer sans bruit. |
 | Handoff packet | subagent | orchestrateur, étape suivante | passer le relais. |
 | Claim ledger | producteur / QA | critique, client, livraison | prouver les affirmations. |
@@ -16,6 +17,7 @@ Cette page rassemble les contrats d'interface entre les étapes, les agents, les
 | Mission ledger event | orchestrateur / runtime | audit, mémoire, observabilité | tracer transitions et décisions. |
 | Registre des surfaces runtime | orchestrateur / ops | gouvernance, sécurité, mémoire | gouverner prompts, hooks, skills, traces et artefacts. |
 | Registre risques IA | orchestrateur | critique, QA, sécurité | anticiper défauts IA. |
+| Pattern record | architecte / gouvernance | référentiel agentique | suivre statut, maturité, exigences et preuves d'un pattern. |
 | Contrat MCP | ops / sécurité | orchestrateur, outils | gouverner intégrations externes. |
 | Dossier d'acceptation | orchestrateur | client | livrer et faire accepter. |
 | Rapport d'incident | détecteur / orchestrateur | client, sécurité, ops | réparer et capitaliser. |
@@ -25,9 +27,14 @@ Cette page rassemble les contrats d'interface entre les étapes, les agents, les
 
 - [Brief agentique](modeles/brief-agentique.md)
 - [Carte Kanban agentique](modeles/carte-kanban-agentique.md)
+- [Context pack](modeles/context-pack.md)
+- [Task envelope](modeles/task-envelope.md)
+- [Handoff packet](modeles/handoff-packet.md)
 - [Claim ledger](modeles/claim-ledger.md)
 - [Evidence pack](modeles/evidence-pack.md)
 - [Verification verdict](modeles/verification-verdict.md)
+- [Memory record](modeles/memory-record.md)
+- [Pattern record](modeles/pattern-record.md)
 - [Événement de mission ledger](modeles/mission-ledger-event.md)
 - [Registre des surfaces runtime](modeles/registre-surfaces-runtime.md)
 - [Matrice de conformité agentique](modeles/matrice-conformite-agentique.md)
@@ -44,6 +51,12 @@ Cette page rassemble les contrats d'interface entre les étapes, les agents, les
 | Entrée analyste | Sortie attendue architecte |
 | --- | --- |
 | problème, valeur, utilisateurs, scope, contraintes, critères | options, frontières, compromis, risques, ADR éventuel |
+
+## Contrat orchestrateur de contexte vers subagent
+
+| Entrée orchestrateur de contexte | Sortie attendue subagent |
+| --- | --- |
+| context pack, task envelope, contraintes, sources incluses/exclues, scorecard | handoff packet sourcé, preuves, hypothèses, risques, prochaine étape |
 
 ## Contrat architecte vers développeur
 

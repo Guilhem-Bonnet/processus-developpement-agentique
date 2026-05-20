@@ -41,6 +41,7 @@ Le modèle ne couvre pas :
 | Orchestrateur | Qualifier, planifier, déléguer et synthétiser. | brief, Kanban, règles | cartes, task envelopes, décisions |
 | Policy engine | Autoriser, bloquer ou escalader. | tâche, risques, permissions | décision allow/block/escalate |
 | Context router | Sélectionner le contexte pertinent. | mission, rôle, budget | contexte minimal sourcé |
+| Orchestrateur de contexte avancé | Arbitrer profils, budgets, couches mémoire, exclusions et persistance. | mission, sources, mémoire, politiques | context pack, scorecard, décision de rétention |
 | Model router | Choisir le modèle adapté. | tâche, risque, coût, confidentialité | modèle principal, fallback |
 | Tool registry | Gouverner les outils. | inventaire, scopes, risques | outils autorisés par tâche |
 | Hook engine | Intercepter moments critiques. | événements, politiques | blocage, alerte, journal |
@@ -55,11 +56,13 @@ Le modèle ne couvre pas :
 | --- | --- | --- | --- |
 | Brief agentique | client / orchestrateur | orchestrateur | décrire le besoin et les contraintes. |
 | Carte Kanban | orchestrateur | équipe agentique | porter état, contexte, risques, modèles et preuves. |
+| Context pack | orchestrateur de contexte | subagent / étape | transmettre sources vérifiées, exclusions, contraintes et confiance. |
 | Task envelope | orchestrateur | subagent | limiter objectif, outils, contexte et sortie. |
 | Handoff packet | subagent | orchestrateur | transmettre résultat, preuves, hypothèses, risques. |
 | Claim ledger | producteur | QA / critique | relier affirmation et preuve. |
 | Dossier d'acceptation | orchestrateur | client | permettre acceptation ou refus éclairé. |
 | Rapport d'incident | détecteur | gouvernance | contenir, corriger et prévenir. |
+| Pattern record | architecte / gouvernance | référentiel agentique | suivre statut, maturité, exigences et preuves d'un pattern. |
 
 ## Cycle de fonctionnement
 

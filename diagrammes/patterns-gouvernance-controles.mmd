@@ -1,0 +1,9 @@
+flowchart TD
+    A["GOV-01 Policy engine et hooks"] --> B["allow / block / escalate"]
+    C["GOV-02 Dry-run avant action risquée"] --> B
+    D["GOV-03 Hook lifecycle progressif"] --> A
+    E["GOV-04 Autonomie gouvernée"] --> A
+    F["MOD-01 Model router"] --> A
+    G["MOD-02 Model retirement guard"] --> F
+    B --> H["Validation authority"]
+    B --> I["Incident ou exécution autorisée"]

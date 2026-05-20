@@ -13,15 +13,31 @@ flowchart TD
     A --> D["Graphe de connaissances<br/>relations, dépendances, provenance"]
     A --> E["Sidecar structuré<br/>faits temporels, journaux agents"]
     A --> F["Sources de vérité<br/>workspace, docs, tests, décisions"]
-    B --> G["Context router"]
+    B --> G["Orchestrateur de contexte avancé"]
     C --> G
     D --> G
     E --> G
     F --> G
-    G --> H["Contexte minimal vérifié"]
+    G --> H["Context pack minimal vérifié"]
 ```
 
 La source autonome est disponible dans [../diagrammes/memoire-hybride-agentique.mmd](../diagrammes/memoire-hybride-agentique.mmd).
+
+## Position de l'orchestrateur de contexte
+
+Les niveaux de mémoire ne décident pas seuls. Ils stockent, rappellent, relient ou prouvent. L'orchestrateur de contexte avancé, décrit dans [orchestration-contexte-agentique.md](orchestration-contexte-agentique.md), se situe au-dessus d'eux pour composer un paquet de contexte utile à une tâche précise.
+
+| Niveau | Ce qu'il apporte | Décision de l'orchestrateur |
+| --- | --- | --- |
+| Fenêtre active | objectif immédiat, derniers échanges utiles. | conserver seulement ce qui pilote l'action courante. |
+| Contexte chaud | état de mission, Kanban, caches, verrous. | utiliser si mission, TTL et version correspondent. |
+| Mémoire vectorielle | rappel sémantique et exemples proches. | traiter comme candidat, puis vérifier la source active. |
+| Graphe | dépendances, provenance, liens décision-preuve-tâche. | utiliser pour détecter impact, contradictions et chaînes causales. |
+| Sidecar structuré | faits temporels, confiance, validité. | filtrer selon valid_from, valid_to, confidence et source_id. |
+| Journal append-only | historique auditables des transitions. | relire pour reprise, incident, justification ou post-mortem. |
+| Source de vérité | état réellement applicable. | prioriser pour toute décision critique ou durable. |
+
+La sortie attendue n'est pas "plus de mémoire", mais un context pack minimal, sourcé et proportionné.
 
 ## Couches de mémoire
 

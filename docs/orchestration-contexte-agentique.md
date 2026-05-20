@@ -8,24 +8,27 @@ L'analogie humaine est simple : on ne donne pas toute l'histoire de l'entreprise
 
 ```mermaid
 flowchart TD
-    A([Etape courante du processus]) --> B["Profil de contexte<br/>role, objectif, risque, livrable"]
-    B --> C["Budget de contexte<br/>tiny, small, medium, deep"]
+    A([Etape courante du processus]) --> B["Orchestrateur de contexte avance<br/>role, objectif, risque, livrable"]
+    B --> B1["Scorecard contexte<br/>suffisance, fraicheur, preuve, cout"]
+    B1 --> C["Budget de contexte<br/>tiny, small, medium, deep"]
     C --> D["Plan de recuperation<br/>quoi chercher, ou chercher, seuils"]
 
     D --> E1["Redis chaud<br/>etat session, Kanban, cache, derniers resultats"]
     D --> E2["Base vectorielle<br/>docs, ADR, incidents, patterns, similarite"]
     D --> E3["Sources de verite<br/>workspace, tests, CI, docs officielles"]
-    D --> E4["Registre de retention<br/>active, archive, superseded, obsolete"]
+    D --> E4["Graphe et sidecar<br/>relations, validite, provenance"]
+    D --> E5["Registre de retention<br/>active, archive, superseded, obsolete"]
 
     E1 --> F["Filtre et critique<br/>fraicheur, source, score, sensibilite"]
     E2 --> F
     E3 --> F
     E4 --> F
+    E5 --> F
 
     F --> G{Contexte suffisant et sur ?}
     G -- Non --> H["Reduire, verifier ou demander<br/>source manquante, risque, question client"]
     H --> D
-    G -- Oui --> I["Task envelope<br/>mission, contexte minimal, outils, criteres, sortie"]
+    G -- Oui --> I["Context pack + task envelope<br/>mission, contexte minimal, outils, criteres, sortie"]
 
     I --> J["Subagent specialise<br/>analyste, architecte, design, dev, QA, securite, ops, doc"]
     J --> K["Handoff packet<br/>resultat, preuves, hypotheses, risques, prochain trigger"]
@@ -33,7 +36,7 @@ flowchart TD
 
     L -- Non --> M["Boucle correction<br/>completer contexte, ajuster lot, escalader"]
     M --> A
-    L -- Oui --> N["Ecriture controlee<br/>Redis, vector DB, Kanban, journal, docs"]
+    L -- Oui --> N["Ecriture controlee<br/>Redis, vector DB, graphe, Kanban, journal, docs"]
     N --> P["Knowledge janitor<br/>memoire durable, archive, desindexation, purge"]
     P --> O([Etape suivante])
 ```
@@ -53,6 +56,79 @@ Le contexte n'est pas un volume à maximiser. C'est un budget à optimiser. Un c
 | Indexer toute production agentique. | Indexer seulement les connaissances durables, sourcées et non sensibles. |
 | Réutiliser un vieux rapport parce qu'il est similaire. | Vérifier statut, fraîcheur, version et source active avant réutilisation. |
 | Laisser le subagent conclure librement. | Exiger un handoff packet structuré. |
+
+## Orchestrateur de contexte avancé
+
+L'orchestrateur de contexte avancé est le plan de contrôle situé au-dessus des différents niveaux de mémoire. Redis, vector DB, graphe, sidecar, journal et sources de vérité fournissent des signaux ; l'orchestrateur décide lesquels sont utilisables, dans quel ordre, avec quel budget, pour quel rôle et avec quel niveau de preuve.
+
+Il ne constitue pas une mémoire supplémentaire. Il transforme des mémoires hétérogènes en contexte opérationnel vérifié.
+
+| Responsabilité | Décision attendue |
+| --- | --- |
+| Classifier la tâche | étape, rôle, complexité, risque, confidentialité, livrable. |
+| Choisir le profil | intake, discovery, cadrage, architecture, implémentation, QA, sécurité, livraison, capitalisation. |
+| Arbitrer les couches mémoire | fenêtre active, contexte chaud, vectoriel, graphe, sidecar, journal, source de vérité. |
+| Calculer le budget | tiny, small, medium ou deep, avec justification si extension. |
+| Critiquer les sources | fraîcheur, statut, validité, contradiction, sensibilité, propriétaire. |
+| Composer le context pack | sources incluses, sources exclues, résumé sourcé, contraintes et critères. |
+| Gouverner la délégation | task envelope, outils autorisés, modèle autorisé, format de handoff. |
+| Décider la persistance | Redis, mémoire durable, archive, désindexation, purge ou incident. |
+
+### Séquence de décision
+
+| Étape | Question de contrôle | Sortie |
+| --- | --- | --- |
+| 1. Intake contextuel | Que cherche-t-on à décider ou produire ? | objectif contextualisé. |
+| 2. Profilage | Quel rôle doit agir et quel risque porte la tâche ? | profil + budget initial. |
+| 3. Récupération | Quelles sources candidates sont autorisées ? | liste sourcée et filtrée. |
+| 4. Critique | Le contexte est-il frais, cohérent et suffisant ? | scorecard contexte. |
+| 5. Compression | Peut-on réduire sans perdre de contrainte critique ? | résumé sourcé ou refus. |
+| 6. Délégation | Quel agent reçoit quel paquet de contexte ? | context pack + task envelope. |
+| 7. Retour | Le handoff prouve-t-il assez pour avancer ? | transition, correction ou escalade. |
+| 8. Rétention | Que faut-il garder, invalider ou oublier ? | écriture contrôlée ou nettoyage. |
+
+### Context scorecard
+
+| Critère | Seuil attendu |
+| --- | --- |
+| Suffisance | Les critères d'acceptation et contraintes utiles sont présents. |
+| Provenance | Toute source critique est identifiable et active. |
+| Fraîcheur | Les versions, dates et statuts ne sont pas obsolètes. |
+| Cohérence | Les contradictions sont résolues ou explicitement portées comme risques. |
+| Minimisation | Le contexte transmis est le plus petit paquet fiable. |
+| Sensibilité | Les données sensibles sont exclues, masquées ou routées vers un modèle autorisé. |
+| Vérifiabilité | Les affirmations durables renvoient à une preuve ou source de vérité. |
+
+### Context pack
+
+Le context pack est la sortie directe de l'orchestrateur de contexte. Il complète le task envelope : le task envelope dit quoi faire, le context pack dit avec quelles informations vérifiées.
+
+```yaml
+context_pack:
+  mission_id: "MIS-001"
+  context_profile: "architecture"
+  budget: "deep"
+  included_sources:
+    - id: "SRC-adr-12"
+      status: "active"
+      reason: "decision architecture actuelle"
+      confidence: "high"
+    - id: "SRC-incident-04"
+      status: "active"
+      reason: "risque deja observe"
+      confidence: "medium"
+  excluded_sources:
+    - id: "SRC-old-report"
+      reason: "superseded"
+  constraints:
+    - "verifier toute source vectorielle contre sa source active"
+    - "ne pas transmettre de donnees sensibles non minimisees"
+  scorecard:
+    sufficiency: "ok"
+    provenance: "ok"
+    freshness: "warning"
+    sensitivity: "ok"
+```
 
 ## Profils de contexte
 
