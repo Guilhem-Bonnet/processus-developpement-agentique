@@ -1,5 +1,7 @@
 # Architecture cible issue des références agentiques
 
+> Statut : annexe informative. Cette page synthétise les références analysées et alimente la norme, mais les obligations normatives restent définies dans [Norme de structure agentique](norme-structure-agentique.md), [Exigences normatives](exigences-normatives-structure-agentique.md) et [Matrice normative maîtresse](matrice-normative-maitresse.md).
+
 Cette page consolide la revue des projets de référence présents dans `/mnt/Travail/Projets/Dev/Référence-Agentique/`. Elle transforme les idées récurrentes en briques récupérables pour le standard : patterns, contrôles, diagrammes, observabilité, télémétrie et gouvernance.
 
 Le plan de merge complet des ajouts à réaliser est détaillé dans [Plan complet d'ajouts à la conception agentique](plan-ajouts-conception-agentique.md).

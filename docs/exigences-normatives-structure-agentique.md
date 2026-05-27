@@ -2,6 +2,8 @@
 
 Cette page exprime les exigences sous forme normative. Elle sert de base de conformité pour vérifier qu'une structure agentique est réellement fonctionnelle, et pas seulement capable de produire du texte.
 
+La table de pilotage qui relie ces exigences aux profils, preuves, patterns et contrôles est la [matrice normative maîtresse](matrice-normative-maitresse.md).
+
 ## Mission et besoin
 
 | ID | Exigence | Niveau |

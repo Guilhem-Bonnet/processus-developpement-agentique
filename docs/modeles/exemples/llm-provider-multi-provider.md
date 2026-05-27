@@ -1,5 +1,7 @@
 # Exemple rempli - LLM provider registry
 
+> Statut : annexe informative. Cet exemple illustre un template ; il ne remplace pas une preuve active dans un projet réel.
+
 ```yaml
 llm_providers:
   - provider_id: github-copilot
@@ -43,4 +45,3 @@ routing:
       primary: local/local-code
       fallback: human_escalation
 ```
-

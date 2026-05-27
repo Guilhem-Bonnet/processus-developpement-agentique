@@ -1,5 +1,7 @@
 # Exemple rempli - workflow state manifest
 
+> Statut : annexe informative. Cet exemple illustre un template ; il ne remplace pas une preuve active dans un projet réel.
+
 ```yaml
 workflow:
   id: WF-feature-simple
@@ -40,4 +42,3 @@ workflow:
       trigger: risk_level in ["high", "critical"]
       resume_state: discovery
 ```
-

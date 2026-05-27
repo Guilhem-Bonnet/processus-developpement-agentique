@@ -1,5 +1,7 @@
 # Exemple rempli - browser tool contract
 
+> Statut : annexe informative. Cet exemple illustre un template ; il ne remplace pas une preuve active dans un projet réel.
+
 ```yaml
 browser_tool:
   id: BTW-ui-validation
@@ -35,4 +37,3 @@ browser_tool:
     risky_action_requires: human_validation
     production_access: denied
 ```
-

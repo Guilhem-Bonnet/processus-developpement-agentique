@@ -1,5 +1,7 @@
 # Exemple rempli - capability pack
 
+> Statut : annexe informative. Cet exemple illustre un template ; il ne remplace pas une preuve active dans un projet réel.
+
 ```yaml
 capability_pack:
   id: CAP-code-reviewer
@@ -34,4 +36,3 @@ capability_pack:
       - agent.subagent.run
       - agent.evidence.pack
 ```
-

@@ -1,5 +1,7 @@
 # Parcours d'implémentation agentique
 
+> Statut : annexe informative. Ce document aide à appliquer la norme, mais ne crée pas d'obligation normative. Les obligations sont définies dans [Norme de structure agentique](norme-structure-agentique.md), [Exigences normatives](exigences-normatives-structure-agentique.md) et [Matrice normative maîtresse](matrice-normative-maitresse.md).
+
 Ce parcours transforme le catalogue complet en chemin progressif. Il évite l'anti-pattern consistant à appliquer tous les patterns dès le premier jour.
 
 ## Démarrage recommandé
@@ -40,4 +42,3 @@ Un pattern est adopté seulement si ses preuves existent. Une documentation sans
 | [LLM provider multi-provider](modeles/exemples/llm-provider-multi-provider.md) | Déclarer Copilot, Claude, Codex, Gemini ou local sans lock-in. |
 | [Capability pack reviewer](modeles/exemples/capability-pack-reviewer.md) | Publier une capacité réutilisable avec permissions et tests. |
 | [Browser tool validation UI](modeles/exemples/browser-tool-validation-ui.md) | Encadrer une validation navigateur avec DOM, capture et logs. |
-

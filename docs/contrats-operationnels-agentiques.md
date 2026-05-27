@@ -88,6 +88,8 @@ Cette page rassemble les contrats d'interface entre les étapes, les agents, les
 
 ## Exemples remplis
 
+Les exemples ci-dessous sont informatifs : ils montrent comment instancier les templates, mais ne créent pas d'obligation normative supplémentaire.
+
 - [Workflow feature simple](modeles/exemples/workflow-feature-simple.md)
 - [Knowledge source repo produit](modeles/exemples/knowledge-source-repo-produit.md)
 - [LLM provider multi-provider](modeles/exemples/llm-provider-multi-provider.md)

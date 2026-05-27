@@ -1,14 +1,40 @@
 # Standard de structure agentique
 
-Ce projet documente la base d'une structure agentique fonctionnelle, sous une forme proche d'un standard, d'un référentiel d'architecture et d'un catalogue de design patterns. L'agent devient l'entreprise opératrice et l'utilisateur devient le client. Le client apporte le besoin, le contexte métier, les arbitrages et l'acceptation. L'entreprise-agent organise la découverte, le cadrage, l'architecture, l'exécution, la qualité, la sécurité, la traçabilité et la livraison au moyen de prompts, skills, outils, MCP, hooks, mémoire, Kanban et subagents.
+Ce projet documente la base d'une structure agentique fonctionnelle sous forme de norme, de référentiel de conformité et de catalogue de design patterns. L'agent devient l'entreprise opératrice et l'utilisateur devient le client. Le client apporte le besoin, le contexte métier, les arbitrages et l'acceptation. L'entreprise-agent organise la découverte, le cadrage, l'architecture, l'exécution, la qualité, la sécurité, la traçabilité et la livraison au moyen de prompts, skills, outils, MCP, hooks, mémoire, Kanban et subagents.
 
-Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle définit les éléments constitutifs, exigences, interfaces, niveaux de conformité et patterns nécessaires pour concevoir une structure agentique gouvernable, vérifiable et maintenable.
+Le cœur du projet est normatif : il définit des obligations, interdictions, preuves, niveaux de conformité et critères d'audit. Les parcours, exemples et synthèses de références sont des annexes informatives.
 
-## Contenu
+## Cœur normatif
+
+- [Norme de structure agentique](docs/norme-structure-agentique.md)
+- [Statut documentaire de la norme](docs/statut-documentaire-norme.md)
+- [Matrice normative maîtresse](docs/matrice-normative-maitresse.md)
+- [Terminologie agentique](docs/terminologie-agentique.md)
+- [Modèle de référence d'une structure agentique](docs/modele-reference-structure-agentique.md)
+- [Exigences normatives d'une structure agentique](docs/exigences-normatives-structure-agentique.md)
+- [Niveaux de conformité agentique](docs/niveaux-conformite-agentique.md)
+- [Matrice de preuves de conformité agentique](docs/matrice-preuves-conformite-agentique.md)
+- [Catalogue des contrôles agentiques](docs/catalogue-controles-agentiques.md)
+- [Matrice risques, contrôles et preuves](docs/matrice-risques-controles-preuves.md)
+- [Catalogue des patterns agentiques](docs/patterns/README.md)
+- [Contrats opérationnels agentiques](docs/contrats-operationnels-agentiques.md)
+
+## Annexes informatives et sources
+
+- [Parcours d'implémentation agentique](docs/parcours-implementation-agentique.md)
+- [Exemples remplis de contrats](docs/contrats-operationnels-agentiques.md#exemples-remplis)
+- [Architecture cible issue des références agentiques](docs/architecture-cible-reference-agentique.md)
+- [Plan complet d'ajouts à la conception agentique](docs/plan-ajouts-conception-agentique.md)
+- [Références agentiques](docs/references-agentiques.md)
+
+## Contenu détaillé
 
 - [Diagramme de décision agentique](docs/diagramme-decision-agentique.md)
 - [Diagramme d'orchestration interne](docs/diagramme-orchestration-agentique.md)
 - [Terminologie agentique](docs/terminologie-agentique.md)
+- [Norme de structure agentique](docs/norme-structure-agentique.md)
+- [Statut documentaire de la norme](docs/statut-documentaire-norme.md)
+- [Matrice normative maîtresse](docs/matrice-normative-maitresse.md)
 - [Modèle de référence d'une structure agentique](docs/modele-reference-structure-agentique.md)
 - [Exigences normatives d'une structure agentique](docs/exigences-normatives-structure-agentique.md)
 - [Catalogue des patterns agentiques](docs/patterns/README.md)

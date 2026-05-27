@@ -1,5 +1,7 @@
 # Exemple rempli - knowledge source index
 
+> Statut : annexe informative. Cet exemple illustre un template ; il ne remplace pas une preuve active dans un projet réel.
+
 ```yaml
 knowledge_source:
   id: KSI-product-docs
@@ -37,4 +39,3 @@ knowledge_source:
     require_source_link: true
     critical_decision_requires_active_source: true
 ```
-
