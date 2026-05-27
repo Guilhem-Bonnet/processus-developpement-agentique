@@ -114,6 +114,8 @@ context_pack:
 | Handoff packet | Retour structuré permettant transition, preuve et mémoire. |
 | Source registry | Statut et validité des sources récupérables. |
 | Memory gate | Contrôle lecture, écriture, indexation et invalidation mémoire. |
+| Workflow state manifest | États, transitions, guards, interruptions et preuves. |
+| Flow DSL minimal | Description compacte de flows exportables. |
 
 ## ORC-06 : Context constitution
 
@@ -175,3 +177,34 @@ context_pack:
 | small -> medium | Plusieurs sources ou contraintes doivent être comparées. | synthèse sourcée. |
 | medium -> deep | Décision architecture, incident, sécurité ou arbitrage durable. | options, preuves, risques. |
 | deep -> medium/small | Analyse terminée. | handoff compressé et sources clés. |
+
+## ORC-09 : Workflow State Engine
+
+| Élément | Description |
+| --- | --- |
+| Intention | Rendre les workflows agentiques explicites, reprenables et auditables. |
+| Problème | Les agents enchaînent souvent étapes, interruptions et reprises dans une logique cachée au prompt ou au runtime. |
+| Solution | Déclarer un manifeste d'états, transitions, guards, retries, interruptions, compensations et preuves minimales. |
+| Contrôles | Workflow state manifest, mission ledger append-only, evidence-driven transition, telemetry events. |
+| Anti-pattern | Décrire un process dans un prompt sans état machine ni preuve de transition. |
+
+### États minimaux recommandés
+
+| État | Rôle |
+| --- | --- |
+| intake | qualifier intention, contraintes et ambiguïtés critiques. |
+| discovery | charger sources, connaissances et risques. |
+| decision | choisir option, modèle, capacité ou escalade. |
+| execution | produire action, artefact ou changement. |
+| verification | relier preuves aux critères. |
+| capitalization | décider rétention, mémoire, archive ou purge. |
+
+## ORC-10 : Flow DSL minimal
+
+| Élément | Description |
+| --- | --- |
+| Intention | Décrire des flows réutilisables sans créer un langage complexe prématuré. |
+| Problème | Les workflows restent dispersés entre prompts, scripts et documentation, ou deviennent un DSL trop riche et fragile. |
+| Solution | Définir un DSL minimal : états, transitions, guards, preuves et export Mermaid/manifest. |
+| Contrôles | Flow DSL minimal, workflow state manifest, validation syntaxique, dry-run de flow. |
+| Anti-pattern | Encoder la logique métier dangereuse directement dans le DSL au lieu de la garder dans les policies/outils. |

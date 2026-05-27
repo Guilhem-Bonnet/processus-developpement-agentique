@@ -6,3 +6,13 @@ flowchart TD
     E --> F["RUN-02 Runtime output governance"]
     F --> G["Registre surfaces runtime"]
     F --> H["Rétention / indexation / audit"]
+    I["RUN-03 Kubernetes agent control plane\nclient-go provider + quotas + OTel"] --> F
+    J["RUN-04 Orders exec/formula dispatcher\nshell-only vs agent workflow"] --> F
+    K["RUN-05 Primitive-first capability model\nroles as pack config"] --> E
+    L["RUN-06 Capability marketplace\npacks + discovery"] --> K
+    M["RUN-07 Skill/capability lifecycle\ndraft -> retired"] --> L
+    N["RUN-08 Runtime provider contract\nlifecycle + health"] --> F
+    O["RUN-09 Agent backend boundary\nports + adapters"] --> N
+    P["RUN-10 Local agent worker pool\nqueue + WIP + cleanup"] --> N
+    Q["RUN-11 Workspace isolation\nroot + mounts + secrets"] --> N
+    R["RUN-12 Secure local coordinator\nsigned inbox + no token proxy"] --> N

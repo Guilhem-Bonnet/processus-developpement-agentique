@@ -19,6 +19,8 @@ Toute exigence normative DOIT pouvoir pointer vers au moins une preuve attendue 
 | Incidents | AG-INC | rapport incident, rollback, purge mémoire, post-mortem, eval de prévention. |
 | Rétention | AG-RET | registre de rétention, TTL, archive, désindexation, cleanup report. |
 | Patterns | AG-PAT | catalogue de patterns, lifecycle, matrice patterns-exigences-preuves, preuves d'usage. |
+| Audit | AG-AUD | audit report, checklist de conformité, exceptions, matrice risques-contrôles-preuves. |
+| Observabilité | AG-OBS | traces corrélées, métriques, logs, telemetry events, dashboards, alertes SLO. |
 
 ## Statuts de conformité
 
@@ -58,6 +60,10 @@ Toute exigence normative DOIT pouvoir pointer vers au moins une preuve attendue 
 | Verification verdict | décision de fermeture ou réouverture. |
 | Context pack | sources incluses/exclues, scorecard, contraintes et confiance. |
 | Pattern matrix | lien entre patterns, exigences et preuves. |
+| Control record | définition d'un contrôle, déclencheur, preuve et télémétrie. |
+| Telemetry event | événement corrélé à mission, tâche, contrôle, preuve ou incident. |
+| Audit report | niveau atteint, écarts, exceptions et risques résiduels. |
+| Exception record | justification, risque, contrôles compensatoires et expiration. |
 | Memory audit | obsolescence, secrets, désindexation. |
 | Retention registry | destination durable, archive, TTL ou purge. |
 | Acceptance dossier | acceptation client et risques résiduels. |
@@ -70,7 +76,7 @@ Toute exigence normative DOIT pouvoir pointer vers au moins une preuve attendue 
 | 2 Contrôlé | tool registry, hooks essentiels, permissions, risques IA. |
 | 3 Orchestré | subagents, context router, model router, workflow manifest. |
 | 4 Gouverné | evals, SLO, incidents, rétention, validation authority. |
-| 5 Mature | observabilité bout en bout, memory gate, doc drift, audit périodique. |
+| 5 Mature | observabilité bout en bout, télémétrie corrélée, memory gate, doc drift, audit périodique. |
 
 ## Contrôle de dérive documentaire
 

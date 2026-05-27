@@ -1,6 +1,6 @@
 # Mémoire hybride agentique
 
-Cette page décrit une architecture mémoire mature pour structure agentique. Elle complète le couple Redis/vector DB avec graphe, sidecar structuré, journal append-only et registre de sources.
+Cette page décrit une architecture mémoire mature pour structure agentique. Elle complète le couple Redis/vector DB avec graphe, sidecar structuré, journal append-only et registre de sources. Elle distingue aussi la mémoire agentique d'une base de connaissance indexée : la première retient les apprentissages et décisions du système, la seconde expose un corpus documentaire externe gouverné.
 
 ## Principe
 
@@ -10,11 +10,13 @@ Une mémoire agentique mature n'est pas un simple RAG. Elle combine plusieurs fo
 flowchart TD
     A([Action agentique]) --> B["Contexte chaud<br/>session, cache, état court"]
     A --> C["Mémoire vectorielle<br/>similarité, rappel long terme"]
+    A --> C2["Base de connaissance indexée<br/>repo, URL, API, MCP, DB, dossier"]
     A --> D["Graphe de connaissances<br/>relations, dépendances, provenance"]
     A --> E["Sidecar structuré<br/>faits temporels, journaux agents"]
     A --> F["Sources de vérité<br/>workspace, docs, tests, décisions"]
     B --> G["Orchestrateur de contexte avancé"]
     C --> G
+    C2 --> G
     D --> G
     E --> G
     F --> G
@@ -39,6 +41,17 @@ Les niveaux de mémoire ne décident pas seuls. Ils stockent, rappellent, relien
 
 La sortie attendue n'est pas "plus de mémoire", mais un context pack minimal, sourcé et proportionné.
 
+## Base de connaissance indexée vs mémoire agentique
+
+| Élément | Base de connaissance indexée | Mémoire agentique |
+| --- | --- | --- |
+| Origine | Documentation externe ou interne déclarée : repo, URL, API, MCP, base de données, dossier. | Expérience du système : missions, décisions, incidents, handoffs, apprentissages. |
+| But | Spécialiser le flow sur un domaine ou une organisation. | Améliorer continuité, rappel et capitalisation agentique. |
+| Gouvernance | Owner de source, ACL, connecteur, freshness, réindexation. | Memory gate, promotion, TTL, contamination response. |
+| Vérité | Revient à la source active indexée. | Doit être vérifiée contre source ou preuve. |
+| Risque | Corpus obsolète, sensible, mal scopé ou trop large. | Mémoire contaminée, sur-apprentissage, dérive. |
+| Usage contexte | Retrieval candidat avec provenance et extrait. | Rappel candidat ou relation historique. |
+
 ## Couches de mémoire
 
 | Couche | Usage | Risque | Contrôle |
@@ -46,6 +59,7 @@ La sortie attendue n'est pas "plus de mémoire", mais un context pack minimal, s
 | Fenêtre active | tenir l'objectif immédiat. | saturation, oubli. | handoff court. |
 | Contexte chaud | conserver état de mission. | mélange de missions, données périmées. | TTL, tenant, invalidation. |
 | Mémoire vectorielle | retrouver documents similaires. | faux rappel, source obsolète. | métadonnées, score, source active. |
+| Base de connaissance indexée | rechercher dans un corpus externe gouverné. | corpus sensible, obsolète ou hors scope. | ACL, owner, freshness, réindexation. |
 | Graphe | relier faits, tâches, agents, preuves. | relations fausses ou anciennes. | provenance, validité temporelle. |
 | Sidecar structuré | stocker faits temporels et journaux. | accumulation non révisée. | valid_from, valid_to, confiance. |
 | Journal append-only | auditer événements. | volume, données sensibles. | rétention, masquage, purge. |

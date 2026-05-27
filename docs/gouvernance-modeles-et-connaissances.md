@@ -6,6 +6,40 @@ Cette page couvre deux actifs critiques de l'entreprise-agent : les modèles IA 
 
 Le choix du modèle est une décision d'architecture. Un modèle rapide, profond, local ou externe n'a pas le même coût, la même latence, la même confidentialité ni le même niveau de raisonnement.
 
+Le standard ne suppose pas un fournisseur unique. Une organisation peut utiliser uniquement GitHub Copilot et ses modèles intégrés, combiner Codex et Claude, ou agréger de nombreux fournisseurs comme Claude, Codex, Gemini, Copilot, modèles locaux, modèles spécialisés et APIs propriétaires. La conception doit donc séparer trois niveaux : provider, modèle et capacité.
+
+## LLM Provider Abstraction
+
+| Niveau | Rôle | Exemple |
+| --- | --- | --- |
+| Provider | Source ou environnement d'accès au modèle. | GitHub Copilot, OpenAI/Codex, Anthropic/Claude, Google/Gemini, modèle local, provider interne. |
+| Modèle | Moteur concret routable. | Claude Sonnet, GPT/Codex, Gemini, modèle vision, modèle local. |
+| Capacité | Ce que le modèle sait faire dans un contexte gouverné. | code, raisonnement, vision, résumé, critique, extraction, tool use, long context. |
+| Adapter | Façon d'appeler le provider. | API directe, IDE intégré, CLI, MCP, SDK, proxy interne, runtime local. |
+| Policy | Conditions d'utilisation. | données autorisées, régions, coûts, evals, fallback, logs. |
+
+### Profils multi-provider supportés
+
+| Cas | Design attendu |
+| --- | --- |
+| Copilot uniquement | Déclarer GitHub Copilot comme provider intégré, lister ses modèles/capacités visibles, appliquer policies de confidentialité et télémétrie disponibles. |
+| Codex + Claude | Définir deux providers, router par tâche : code/patch vers Codex si évalué, architecture/critique vers Claude si autorisé, fallback explicite entre eux. |
+| Multi-marché | Maintenir un provider registry avec adapters, capacités, coûts, statuts, restrictions, evals et fallback par rôle. Aucun modèle ne doit être appelé hors registry. |
+
+### Provider registry minimal
+
+| Champ | Usage |
+| --- | --- |
+| provider_id | Identifiant stable du provider. |
+| access_mode | api / ide_integrated / cli / mcp / local / internal_gateway. |
+| models | Modèles exposés et alias autorisés. |
+| capabilities | code, reasoning, vision, long_context, tool_use, embeddings, rerank. |
+| data_policy | public, interne, confidentiel, local_only, interdit. |
+| cost_policy | prix, budget, quota, alerte, fallback. |
+| telemetry_policy | traces possibles, prompts visibles ou non, logs, rétention. |
+| eval_status | non évalué, candidate, active, restricted, deprecated, disallowed. |
+| fallback_chain | alternatives autorisées par tâche et sensibilité. |
+
 | Critère | Question |
 | --- | --- |
 | Rôle | Quel subagent ou étape utilise ce modèle ? |
@@ -16,6 +50,8 @@ Le choix du modèle est une décision d'architecture. Un modèle rapide, profond
 | Latence | Quel délai acceptable ? |
 | Observabilité | Peut-on tracer usage, coût, erreur et fallback ? |
 | Évaluation | Quels cas prouvent que ce modèle convient ? |
+| Provider | Quel provider expose ce modèle et avec quelles limites d'accès ? |
+| Adapter | L'accès passe-t-il par API, IDE, CLI, MCP, gateway interne ou local ? |
 
 ## Politique de routage LLM
 
@@ -24,7 +60,8 @@ Le routage doit être explicite dans le task envelope dès qu'une tâche dépass
 | Décision | Sortie attendue |
 | --- | --- |
 | Classification de tâche | rôle, complexité, risque, modalité, confidentialité. |
-| Choix du modèle | modèle principal, budget, justification. |
+| Choix du provider | provider autorisé, adapter, policy applicable. |
+| Choix du modèle | modèle principal, budget, justification, capacités requises. |
 | Fallback | modèle alternatif, revue humaine ou suspension. |
 | Évaluation | evals passées, seuils et limites connues. |
 | Journalisation | coût, latence, tokens, erreurs, divergence. |
@@ -63,6 +100,29 @@ Un modèle retiré ne doit pas rester accessible par fallback implicite. Le retr
 | Échec eval critique | bloquer release agentique. |
 | Données sensibles détectées | arrêter et router vers modèle/localité autorisée. |
 | Divergence entre modèles | escalader au critique ou au client selon domaine. |
+
+## Base de connaissance indexée
+
+Une base de connaissance indexée est une couche de spécialisation documentaire. Elle permet à un particulier ou une entreprise de greffer son corpus au flow agentique : documentation produit, specs, ADR, wiki, tickets, API docs, procédures, bases internes, exports ou dossiers locaux.
+
+Elle n'est ni la mémoire agentique ni le contexte de session :
+
+| Couche | Définition | Exemple |
+| --- | --- | --- |
+| Base de connaissance indexée | Corpus externe déclaré, indexé et gouverné. | Repo docs, site produit, API interne, base de tickets, dossier client. |
+| Mémoire agentique | Ce que le système retient de ses propres missions. | Décision déjà prise, incident, préférence validée, handoff promu. |
+| Contexte | Paquet minimal injecté dans une tâche. | Extraits sélectionnés pour un subagent QA. |
+
+| Source greffable | Contrôle minimal |
+| --- | --- |
+| Lien URL ou site docs | scope crawl, date de capture, hash, politique de réindexation. |
+| Repository Git | remote, branche, commit, owner, dirty/freshness check. |
+| API | auth, rate limit, pagination, champs sensibles, contrat de schéma. |
+| MCP | trust gate, permissions, variables d'environnement, outils exposés. |
+| Base de données | read-only, requêtes autorisées, masquage, audit SQL. |
+| Dossier local | classification, owner, indexable, TTL, secret scan. |
+
+Le retrieval depuis cette base produit des candidats sourcés. Pour une décision critique, l'agent doit revenir à la source active ou demander validation.
 
 ## Cycle de vie des connaissances
 

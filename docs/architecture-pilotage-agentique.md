@@ -17,6 +17,7 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | Simulation et reprise | Prévoir l'impact avant action et réparer proprement après incident. | dry-run, checkpoints, rollback, rapport incident, post-mortem |
 | Gouvernance d'exécution | Savoir qui agit, avec quel accès, quel coût de contexte et quel validateur. | matrice d'accès, RACI, Kanban enrichi, budget tokens, revues croisées |
 | Défauts IA | Rendre visibles et récupérables les erreurs natives du modèle. | registre défauts IA, claim ledger, subagent critique, disconfirmation |
+| Audit et observabilité | Relier exigences, risques, contrôles, preuves, verdicts et télémétrie. | control records, telemetry events, audit reports, SLO, dashboards |
 | Livraison et suivi | Rendre le travail visible, acceptable et améliorable. | Kanban, dossier de livraison, monitoring, backlog d'amélioration |
 
 ## Position dans le standard
@@ -25,6 +26,7 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | --- | --- |
 | [terminologie-agentique.md](terminologie-agentique.md) | Définit le vocabulaire stable et le langage normatif. |
 | [modele-reference-structure-agentique.md](modele-reference-structure-agentique.md) | Décrit les plans, composants obligatoires et interfaces minimales. |
+| [architecture-cible-reference-agentique.md](architecture-cible-reference-agentique.md) | Consolide les briques utiles issues des projets de référence agentiques. |
 | [exigences-normatives-structure-agentique.md](exigences-normatives-structure-agentique.md) | Liste les exigences vérifiables par domaine. |
 | [patterns/README.md](patterns/README.md) | Classe les patterns réutilisables et anti-patterns par famille. |
 | [profils-capacites-agentiques.md](profils-capacites-agentiques.md) | Décrit les capacités minimales par rôle, outil, mémoire et validation. |
@@ -33,6 +35,7 @@ L'architecture de pilotage décrit comment l'entreprise-agent travaille sans ré
 | [ledger-preuves-verdicts-agentiques.md](ledger-preuves-verdicts-agentiques.md) | Formalise mission ledger, evidence pack et verification verdict. |
 | [memoire-hybride-agentique.md](memoire-hybride-agentique.md) | Étend la mémoire vers vectoriel, graphe, sidecar, source registry et memory gate. |
 | [matrice-preuves-conformite-agentique.md](matrice-preuves-conformite-agentique.md) | Relie exigences normatives et preuves attendues. |
+| [audit-conformite-agentique.md](audit-conformite-agentique.md) | Structure l'audit, les contrôles, les exceptions, la traçabilité et la télémétrie. |
 
 ## Composants principaux
 

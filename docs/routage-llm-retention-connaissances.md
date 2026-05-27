@@ -9,8 +9,9 @@ Le principe est proche de la rétention de logs : tout peut être utile à court
 ```mermaid
 flowchart TD
     A([Tâche ou carte Kanban]) --> B["Classifier la tâche<br/>rôle, risque, complexité, modalité"]
-    B --> C["Router le LLM<br/>capacité, coût, latence, confidentialité"]
-    C --> D{Modèle autorisé et évalué ?}
+    B --> C["Router provider + modèle<br/>capacité, coût, latence, confidentialité"]
+    C --> C1["Provider registry<br/>Copilot, Codex, Claude, Gemini, local, interne"]
+    C1 --> D{Provider et modèle autorisés et évalués ?}
     D -- Non --> E["Fallback ou validation<br/>modèle alternatif, humain, suspension"]
     E --> C
     D -- Oui --> F["Récupérer le contexte<br/>sources actives, Redis, vector DB, workspace"]
@@ -34,6 +35,25 @@ La source autonome est disponible dans [../diagrammes/routage-retention-connaiss
 ## Routage LLM par tâche
 
 Le routage LLM évite deux dérives : utiliser un modèle trop faible pour une décision risquée, ou utiliser un modèle coûteux pour une tâche simple. Le routage doit être explicite dans la carte ou le task envelope.
+
+Le routage est provider-neutral : il choisit d'abord un provider autorisé, puis un modèle/capacité disponible chez ce provider. Le même standard doit fonctionner si l'utilisateur n'a que GitHub Copilot, s'il combine Codex et Claude, ou s'il exploite plusieurs fournisseurs du marché.
+
+## Compatibilité multi-provider
+
+| Cas utilisateur | Configuration attendue | Risque principal | Contrôle |
+| --- | --- | --- | --- |
+| GitHub Copilot uniquement | Provider `copilot`, accès IDE/CLI intégré, modèles exposés par l'environnement. | Capacités réelles variables selon intégration. | Provider registry + evals par rôle. |
+| Codex + Claude | Providers `codex/openai` et `anthropic`, routage par capacité code/raisonnement. | Fallback implicite ou fuite de données entre providers. | Policy par provider + fallback explicite. |
+| Multi-fournisseurs | Registry complet : Copilot, Codex, Claude, Gemini, local, interne, embeddings/rerank. | Explosion de coûts, incohérence, logs dispersés. | Cost registry + telemetry + statuts modèle. |
+
+| Décision | Question |
+| --- | --- |
+| Provider | Quel fournisseur ou environnement peut traiter cette donnée ? |
+| Adapter | L'appel passe-t-il par API directe, IDE intégré, CLI, MCP, gateway interne ou runtime local ? |
+| Capacité | Le modèle supporte-t-il code, vision, long contexte, function/tool use, embeddings ou critique ? |
+| Statut | Le modèle est-il active, restricted, deprecated, disallowed ou local_only ? |
+| Observabilité | Peut-on tracer tokens, coût, latence, erreurs et fallback pour ce provider ? |
+| Portabilité | Existe-t-il un fallback équivalent chez un autre provider autorisé ? |
 
 | Type de tâche | Modèle cible | Budget | Validation | Fallback |
 | --- | --- | --- | --- | --- |

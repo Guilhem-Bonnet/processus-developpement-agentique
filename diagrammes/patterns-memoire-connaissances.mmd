@@ -7,4 +7,11 @@ flowchart TD
     G["KNO-04 Knowledge promotion"] --> A
     H["KNO-05 Memory contamination response"] --> F
     I["KNO-03 Doc drift detector"] --> F
+    K["KNO-06 Knowledge Base Indexer\nrepo / URL / API / MCP / DB / dossier"] --> B
+    K --> C
+    K --> D
+    L["KNO-07 Memory integrity validator\nfreshness + provenance"] --> F
+    M["KNO-08 Doc-to-graph pipeline\nrelations + contradictions"] --> D
+    N["KNO-09 Knowledge narrative packaging\nsourced synthesis"] --> J
+    O["KNO-10 Source Graph Resolver\nsupersedes + proves + contradicts"] --> D
     B --> J["Context pack vérifié"]

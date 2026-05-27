@@ -5,5 +5,15 @@ flowchart TD
     E["GOV-04 Autonomie gouvernée"] --> A
     F["MOD-01 Model router"] --> A
     G["MOD-02 Model retirement guard"] --> F
+    J["GOV-05 Agent privilege boundary\ncontroller token scrub + protected keys"] --> A
+    K["GOV-06 Merge lane fault classifier\ntransient retry / hard escalate"] --> B
+    L["GOV-07 Tool blast-radius limiter\nscope + budget + env"] --> A
+    M["GOV-08 Guardrail contract\nversioned controls"] --> A
+    N["GOV-09 MCP Trust Gate\nserver/tool trust"] --> L
+    O["GOV-10 Policy by environment\nlocal/staging/prod"] --> A
+    P["GOV-11 Cluster action dry-run\nimpact + rollback"] --> C
+    Q["GOV-12 Prompt Injection Firewall\nexternal content isolation"] --> A
+    R["GOV-13 Remote Hygiene Guard\nrefs + freshness"] --> A
+    S["GOV-14 Decision Council Gate\nquorum + veto"] --> H
     B --> H["Validation authority"]
     B --> I["Incident ou exécution autorisée"]

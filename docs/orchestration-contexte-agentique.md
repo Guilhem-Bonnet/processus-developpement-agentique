@@ -1,6 +1,6 @@
 # Orchestration du contexte agentique
 
-L'orchestration du contexte est la couche qui permet à l'entreprise-agent de rester légère, fiable et spécialisée. Elle décide quelle quantité de contexte donner à chaque étape, quel contexte récupérer depuis Redis, la base vectorielle ou les sources de vérité, quel subagent appeler, puis quoi conserver pour la suite.
+L'orchestration du contexte est la couche qui permet à l'entreprise-agent de rester légère, fiable et spécialisée. Elle décide quelle quantité de contexte donner à chaque étape, quel contexte récupérer depuis Redis, la base vectorielle, la base de connaissance indexée ou les sources de vérité, quel subagent appeler, puis quoi conserver pour la suite.
 
 L'analogie humaine est simple : on ne donne pas toute l'histoire de l'entreprise à chaque personne. On donne à chacun une mission claire, les éléments nécessaires, les contraintes, les critères de réussite et le format de restitution. Une fois la tâche terminée, la personne produit un passage de relais exploitable pour déclencher la suite.
 
@@ -14,16 +14,18 @@ flowchart TD
     C --> D["Plan de recuperation<br/>quoi chercher, ou chercher, seuils"]
 
     D --> E1["Redis chaud<br/>etat session, Kanban, cache, derniers resultats"]
-    D --> E2["Base vectorielle<br/>docs, ADR, incidents, patterns, similarite"]
+    D --> E2["Knowledge Base Indexer<br/>repos, URLs, APIs, MCP, DB, dossiers"]
     D --> E3["Sources de verite<br/>workspace, tests, CI, docs officielles"]
     D --> E4["Graphe et sidecar<br/>relations, validite, provenance"]
     D --> E5["Registre de retention<br/>active, archive, superseded, obsolete"]
+    D --> E6["Base vectorielle<br/>similarite et rappel candidat"]
 
     E1 --> F["Filtre et critique<br/>fraicheur, source, score, sensibilite"]
     E2 --> F
     E3 --> F
     E4 --> F
     E5 --> F
+    E6 --> F
 
     F --> G{Contexte suffisant et sur ?}
     G -- Non --> H["Reduire, verifier ou demander<br/>source manquante, risque, question client"]
@@ -52,6 +54,7 @@ Le contexte n'est pas un volume à maximiser. C'est un budget à optimiser. Un c
 | Tout charger dans le prompt principal. | Charger un profil de contexte adapté à l'étape. |
 | Donner le même contexte à tous les subagents. | Donner une enveloppe de tâche spécialisée. |
 | Croire la mémoire vectorielle. | Utiliser la mémoire comme indice puis vérifier la source. |
+| Confondre base de connaissance et mémoire agentique. | Traiter la base de connaissance comme un corpus externe indexé, avec owner, ACL, fraîcheur et réindexation. |
 | Garder indéfiniment l'état chaud. | Utiliser TTL, invalidation et séparation de mission. |
 | Indexer toute production agentique. | Indexer seulement les connaissances durables, sourcées et non sensibles. |
 | Réutiliser un vieux rapport parce qu'il est similaire. | Vérifier statut, fraîcheur, version et source active avant réutilisation. |
@@ -61,13 +64,14 @@ Le contexte n'est pas un volume à maximiser. C'est un budget à optimiser. Un c
 
 L'orchestrateur de contexte avancé est le plan de contrôle situé au-dessus des différents niveaux de mémoire. Redis, vector DB, graphe, sidecar, journal et sources de vérité fournissent des signaux ; l'orchestrateur décide lesquels sont utilisables, dans quel ordre, avec quel budget, pour quel rôle et avec quel niveau de preuve.
 
-Il ne constitue pas une mémoire supplémentaire. Il transforme des mémoires hétérogènes en contexte opérationnel vérifié.
+Il ne constitue pas une mémoire supplémentaire. Il transforme des mémoires hétérogènes, bases de connaissance indexées et sources actives en contexte opérationnel vérifié.
 
 | Responsabilité | Décision attendue |
 | --- | --- |
 | Classifier la tâche | étape, rôle, complexité, risque, confidentialité, livrable. |
 | Choisir le profil | intake, discovery, cadrage, architecture, implémentation, QA, sécurité, livraison, capitalisation. |
 | Arbitrer les couches mémoire | fenêtre active, contexte chaud, vectoriel, graphe, sidecar, journal, source de vérité. |
+| Interroger la base de connaissance | choisir les corpus autorisés, filtres, connecteurs, seuils, ACL et stratégie de vérification. |
 | Calculer le budget | tiny, small, medium ou deep, avec justification si extension. |
 | Critiquer les sources | fraîcheur, statut, validité, contradiction, sensibilité, propriétaire. |
 | Composer le context pack | sources incluses, sources exclues, résumé sourcé, contraintes et critères. |

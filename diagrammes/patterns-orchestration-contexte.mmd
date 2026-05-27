@@ -5,6 +5,9 @@ flowchart TD
     F["ORC-06 Context constitution"] --> E
     G["ORC-07 Context conflict resolver"] --> E
     H["ORC-08 Context budget escalation"] --> E
+    K["ORC-09 Workflow State Engine"] --> L["États / transitions / guards"]
+    M["ORC-10 Flow DSL minimal"] --> K
     E --> I["Context pack"]
     I --> B
-    C --> J["Transition ou correction"]
+    C --> K
+    K --> J["Transition ou correction"]

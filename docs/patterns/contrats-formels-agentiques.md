@@ -131,6 +131,46 @@ Cette page formalise les schémas minimaux des interfaces agentiques. Les templa
 | owner | recommended | Rôle responsable. |
 | review_trigger | recommended | Événement de revue. |
 
+## Control record
+
+| Champ | Obligation | Rôle |
+| --- | --- | --- |
+| control_id | required | Identifier le contrôle. |
+| objective | required | Décrire le risque réduit. |
+| trigger | required | Définir le moment d'application. |
+| owner | required | Identifier le responsable. |
+| decision | required | allow, block, escalate, observe, pass ou fail. |
+| evidence | required | Décrire la preuve produite. |
+| telemetry | conditional | Définir trace, métrique, log ou event attendu. |
+| failure_response | required | Décrire la réponse si le contrôle échoue. |
+
+## Compliance exception
+
+| Champ | Obligation | Rôle |
+| --- | --- | --- |
+| exception_id | required | Identifier l'exception. |
+| requirement_id | required | Relier l'écart à une exigence. |
+| justification | required | Expliquer pourquoi l'écart est accepté temporairement. |
+| residual_risk | required | Décrire le risque restant. |
+| compensating_controls | required | Réduire le risque pendant l'exception. |
+| owner | required | Responsable de résolution. |
+| approver | required | Autorité qui accepte le risque. |
+| expiry | required | Date, release ou trigger de fin. |
+
+## Telemetry event
+
+| Champ | Obligation | Rôle |
+| --- | --- | --- |
+| event_id | required | Identifier l'événement. |
+| trace_id | required | Corréler le run. |
+| mission_id | required | Relier à la mission. |
+| task_id | conditional | Relier à la tâche si applicable. |
+| event_name | required | Nom stable de l'événement. |
+| severity | required | debug, info, warning, error ou critical. |
+| sensitivity | required | Classification de sensibilité. |
+| payload_summary | required | Résumé minimisé. |
+| related_refs | recommended | Control, evidence, verdict, incident ou exception. |
+
 ## Règle finale
 
 Les contrats peuvent être enrichis, mais leurs champs requis ne doivent pas disparaître. Une interface agentique non structurée devient rapidement impossible à auditer.

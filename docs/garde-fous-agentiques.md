@@ -36,6 +36,13 @@ Les garde-fous agentiques protègent le client, le projet et l'entreprise-agent 
 | Vérification absente | Signaler l'impossibilité de tester et le risque résiduel. | mention claire dans la restitution |
 | Mémoire inexacte | Ne mémoriser que les faits stables, sourcés et validés. | note courte, source, portée |
 | Incident non capitalisé | Transformer toute erreur agentique significative en correction durable. | rapport incident, post-mortem, backlog prévention |
+| Provider LLM non déclaré | Interdire tout appel hors registre provider. | provider registry, décision pre-model-route |
+| Version prompt régressive | Relier chaque run à prompt/skill/version et eval. | prompt version, eval dataset, rollback |
+| Tool blast-radius excessif | Déclarer surface fichiers/réseau/shell/browser/coût/env avant l'appel. | tool scope, dry-run, policy decision |
+| Workspace non isolé | Empêcher lecture/écriture hors root et masquer secrets. | workspace policy, path allowlist, secret scan |
+| Runtime opaque | Utiliser un provider contract avec health, logs, ressources et cleanup. | runtime provider contract, session health |
+| Browser risqué | Encadrer URL, actions, DOM, screenshot et logs avant interaction. | browser tool contract, preuve visuelle |
+| Cluster risqué | Simuler impact, RBAC, diff et rollback avant apply. | dry-run cluster, rollback, go/no-go |
 
 ## Garde-fous par étape
 
@@ -56,6 +63,8 @@ Les garde-fous agentiques protègent le client, le projet et l'entreprise-agent 
 | Modèles et connaissances | Le modèle et les sources de connaissance sont gouvernés. | routage modèle, métadonnées, TTL, fallback |
 | Rétention et nettoyage | Les artefacts temporaires ou obsolètes sont archivés, désindexés ou purgés. | registre rétention, knowledge janitor, cleanup |
 | Exécution | Chaque lot reste ciblé et réversible autant que possible. | diff, commandes, journal, checkpoints |
+| Runtime | Provider, workspace, ressources et secrets sont contractuels. | runtime provider contract, health, cleanup |
+| Browser/UI | Les interactions sont scopées et prouvées visuellement. | DOM snapshot, screenshot, logs |
 | Simulation | Les actions risquées sont simulées avant exécution. | dry-run, impact, rollback, validation |
 | Vérification | Le résultat est prouvé par plusieurs signaux adaptés au risque. | tests, lint, build, rendu, scans, evals, revue |
 | Incident et reprise | Les anomalies sont contenues et capitalisées. | rapport, rollback, purge mémoire, post-mortem |
@@ -95,6 +104,9 @@ Une tâche est prête pour l'entreprise-agent quand les points suivants sont con
 | Profil et budget de contexte | requis pour délégation subagent |
 | Task envelope | requis pour subagent ou tâche autonome |
 | Hooks ou validations obligatoires | requis pour tâches risquées |
+| Workflow state manifest | requis pour workflow durable ou mission multi-étapes |
+| Runtime provider contract | requis pour exécution autonome ou multi-worker |
+| Capability pack / skill record | requis si capacité spécialisée routable |
 | Défauts IA plausibles | requis pour tâche moyenne, élevée ou agentique |
 | Claim ledger attendu | requis pour décision ou livraison |
 | Modèle IA et fallback | requis si choix de modèle impacte coût, qualité ou confidentialité |
@@ -123,6 +135,8 @@ Une tâche est terminée quand l'entreprise-agent peut restituer ceci clairement
 | Validation adaptée au risque | QA, sécurité, ops, design, revue humaine ou client |
 | Sécurité et données contrôlées | absence secrets, prompt injection considérée, permissions respectées |
 | Actions tracées | journal, commandes clés, sources, décisions |
+| Trajectoire rejouable | événements intention, action, observation, correction, verdict |
+| Runtime nettoyé | cleanup, secrets non exposés, workspace isolé |
 | Handoff packet disponible | résumé, preuves, hypothèses, risques, prochain trigger |
 | Limites signalées | tests non lancés, hypothèses, risques résiduels |
 | Capitalisation faite | docs, mémoire validée, backlog, evals ou ADR à jour |
@@ -160,12 +174,16 @@ Une tâche est terminée quand l'entreprise-agent peut restituer ceci clairement
 | Pre-decision | décision importante sans alternative ni disconfirmation | options et risque documentés |
 | Pre-delegation | task envelope incomplet, outils trop larges, sortie floue | délégation bloquée |
 | Pre-model-call | modèle non autorisé, coût excessif, donnée sensible | modèle alternatif ou validation |
+| Pre-provider-route | provider non déclaré, adapter absent, policy data incompatible | blocage ou provider autorisé |
 | Pre-context-reuse | source expirée, obsolète, remplacée ou sensible | ignorer, vérifier source active ou désindexer |
 | Pre-index | source temporaire, sensible, non sourcée ou sans owner | indexation bloquée |
 | Scheduled-cleanup | TTL expiré, vieux rapport, embedding obsolète | archive, désindexation ou purge |
 | Pre-dry-run | action risquée sans simulation ni rollback | dry-run ou blocage |
 | Pre-agent-consultation | question floue, contexte trop large, agent consulté non pertinent | consultation refusée ou reformulée |
 | Pre-tool | outil interdit, commande destructive, réseau non autorisé, secret exposé | refus, alternative, demande validation |
+| Pre-browser-action | URL hors scope, action irréversible, preuve visuelle absente | blocage, capture ou validation |
+| Pre-runtime-spawn | workspace non isolé, secrets non scrubbed, ressources absentes | spawn refusé ou runtime corrigé |
+| Pre-cluster-apply | action cluster sans dry-run, impact ou rollback | dry-run et go/no-go |
 | Post-tool | erreur critique, sortie sensible, résultat contradictoire | log, diagnostic, correction |
 | Pre-write | fichier hors périmètre, écriture non réversible, config sensible | validation ou réduction du lot |
 | Pre-memory-write | fait non stable, secret, donnée personnelle, source absente | oubli, masquage ou validation |

@@ -68,12 +68,14 @@ Cette page propose une échelle de conformité pour évaluer une structure agent
 | Surfaces runtime | registre des prompts, agents, skills, hooks, workflows et artefacts de sortie. |
 | Autorités | RACI et validateurs par domaine. |
 | Patterns | lifecycle, maturité et matrice patterns-exigences-preuves. |
+| Exceptions | écarts de conformité documentés avec contrôles compensatoires. |
 
 ## Niveau 5 : mature
 
 | Exigence | Attendu |
 | --- | --- |
 | Observabilité | traces bout en bout des décisions, outils, coûts et validations. |
+| Télémétrie | métriques, logs et événements corrélés par mission, tâche et trace. |
 | Auditabilité | capacité à reconstruire pourquoi une décision a été prise. |
 | Conformité prouvée | matrice reliant exigences, preuves, owners et risques résiduels. |
 | Amélioration | incidents et métriques alimentent evals, hooks, prompts et patterns. |
@@ -89,6 +91,18 @@ Cette page propose une échelle de conformité pour évaluer une structure agent
 - Une exception doit être documentée avec justification, risque, propriétaire et date de revue.
 - Une conformité déclarative sans preuve est non conforme.
 - Un système peut être conforme sur un périmètre limité, par exemple documentation, code local ou mission sans production.
+
+## Lien avec la maturité des patterns
+
+La conformité mesure le système ; la maturité des patterns mesure le chemin d'adoption. La [matrice de maturité des patterns](patterns/matrice-maturite-patterns.md) indique à partir de quel profil un pattern devient attendu.
+
+| Niveau de conformité | Patterns généralement attendus |
+| --- | --- |
+| N1 Minimal | mission, task envelope, handoff, evidence pack, validation, knowledge index minimal. |
+| N2 Contrôlé | policy engine, blast-radius, prompt injection firewall, memory integrity, dry-run. |
+| N3 Orchestré | context router, model router, workflow state engine, capability marketplace. |
+| N4 Gouverné | telemetry plane, eval lifecycle, prompt/version observability, runtime provider. |
+| N5 Mature | SLO, audit complet, doc drift, provider registry avancé, production readiness. |
 
 ## Matrice de vérification rapide
 
@@ -114,6 +128,10 @@ Cette page propose une échelle de conformité pour évaluer une structure agent
 | Surfaces runtime gouvernées | non requis | partiel | partiel | oui | oui |
 | Matrice preuves/conformité | non requis | non requis | partiel | oui | oui |
 | Matrice patterns/exigences/preuves | non requis | non requis | partiel | oui | oui |
+| Matrice risques/contrôles/preuves | non requis | non requis | partiel | oui | oui |
 | Lifecycle des patterns | non requis | non requis | partiel | oui | oui |
+| Exceptions de conformité | non requis | non requis | non requis | oui | oui |
 | Doc drift detector | non requis | non requis | non requis | partiel | oui |
 | Observabilité complète | non requis | non requis | partiel | partiel | oui |
+| Télémétrie corrélée | non requis | non requis | partiel | partiel | oui |
+| Audit périodique | non requis | non requis | non requis | partiel | oui |

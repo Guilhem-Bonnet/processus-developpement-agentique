@@ -1,6 +1,6 @@
 # Observabilité, evals et SLO agentiques
 
-Cette page transforme la fiabilité agentique en système mesurable. Une entreprise-agent doit pouvoir répondre à quatre questions : que s'est-il passé, pourquoi, à quel coût et avec quel niveau de confiance.
+Cette page transforme la fiabilité agentique en système mesurable. Une entreprise-agent doit pouvoir répondre à quatre questions : que s'est-il passé, pourquoi, à quel coût et avec quel niveau de confiance. Le modèle détaillé de traces, métriques, logs et événements est défini dans [observabilite-telemetrie-agentique.md](observabilite-telemetrie-agentique.md).
 
 ## Objectifs
 
@@ -18,14 +18,17 @@ Cette page transforme la fiabilité agentique en système mesurable. Une entrepr
 | --- | --- |
 | Mission | id, client, type, risque, validateur, statut Kanban. |
 | Contexte | profil, budget, sources retenues, sources rejetées, scores, fraîcheur. |
-| Prompt | version, rôle, instructions projet, task envelope. |
+| Prompt | version, rôle, instructions projet, task envelope, capability pack, skill. |
 | Outil | nom, paramètres sensibles masqués, durée, résultat, erreur. |
 | Subagent | rôle, budget, outils, sortie, handoff, critique. |
 | Décision | options, preuve, hypothèse, validateur, décision. |
 | Ledger | événement mission, transition, actor, raison, tâche et preuve liée. |
 | Vérification | evidence pack, verdict, tests, lint, scans, rendu, evals, revue, go/no-go. |
 | Surface runtime | prompt, skill, agent, hook, workflow ou artefact créé, modifié, promu ou purgé. |
-| Coût | tokens entrée/sortie, modèle, cache hit, latence, coût estimé. |
+| Workflow | état, transition, guard, interruption, preuve requise. |
+| Trajectoire | intention, contexte, décision, action, observation, correction, verdict. |
+| Browser | URL scope, action, DOM snapshot, screenshot, logs console/réseau. |
+| Coût | tokens entrée/sortie, provider, modèle, cache hit, latence, coût estimé. |
 
 La trace ne doit pas stocker de secrets ni de données personnelles inutiles. Elle doit stocker assez pour expliquer une décision.
 
@@ -41,7 +44,9 @@ La trace ne doit pas stocker de secrets ni de données personnelles inutiles. El
 | Sécurité | prompt injections détectées, secrets bloqués, accès refusés, MCP en erreur. |
 | Validation | temps d'attente humain, décisions en suspens, revues critiques bloquantes. |
 | Modèles | succès par modèle, coût par modèle, taux d'erreur, fallback, variance. |
+| Providers LLM | appels par provider, rejets hors registry, fallback provider, conformité data policy. |
 | Runtime | surfaces créées, promues, retirées, drifts détectés, hooks en shadow/canary/enforced. |
+| Sessions | crashs, quarantaines, idle kills, unhealthy rate par model/prompt/rig. |
 
 ## SLO agentiques
 
@@ -59,6 +64,8 @@ Les SLO doivent être adaptés au contexte. Ils ne sont pas des promesses univer
 | Evals critiques | 100 % des evals bloquantes passent avant release agentique. | eval critique échouée. |
 | Verdicts critiques | 100 % des tâches à risque ont un verification verdict. | fermeture sans verdict. |
 | Drift documentaire | 0 drift bloquant avant release. | manifest, hook ou doc incohérent. |
+| Runtime session health | CrashRate et UnhealthyRate sous seuil projet. | session quarantined, idle kill ou crash répété. |
+| Prompt/version regression | 0 régression critique non rollbackée. | baisse eval ou hausse faux Done par version. |
 
 ## Evals agentiques
 
@@ -78,6 +85,10 @@ Les evals testent un comportement d'agent, pas seulement une sortie textuelle. E
 | Coût excessif | L'agent compresse ou réduit le contexte. |
 | Evidence pack incomplet | L'agent refuse la fermeture ou demande preuve manquante. |
 | Modèle retiré | L'agent applique fallback ou suspension. |
+| Provider non déclaré | L'agent bloque l'appel ou route vers provider autorisé. |
+| Prompt régressif | L'agent détecte la version fautive et rollback/canary. |
+| Browser risqué | L'agent refuse action hors scope ou exige preuve visuelle. |
+| Transition sans preuve | L'agent bloque le changement d'état. |
 | Drift runtime/doc | L'agent détecte la divergence et crée une carte de correction. |
 
 ## Scorecard de run

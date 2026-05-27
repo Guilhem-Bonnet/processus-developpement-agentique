@@ -1,0 +1,18 @@
+flowchart TD
+    A["Besoin client"] --> B["Exigences AG-*"]
+    B --> C["Patterns"]
+    C --> D["Contrôles"]
+    D --> E["Preuves"]
+    E --> F["Verification verdict"]
+    F --> G{"Décision"}
+
+    G -- "accepté" --> H["Dossier d'acceptation"]
+    G -- "écart" --> I["Exception conformité"]
+    G -- "défaut" --> J["Incident"]
+
+    D --> K["Traces / métriques / logs / events"]
+    E --> K
+    F --> K
+    K --> L["Dashboards / SLO / alertes"]
+    L --> M["Backlog amélioration"]
+    M --> C

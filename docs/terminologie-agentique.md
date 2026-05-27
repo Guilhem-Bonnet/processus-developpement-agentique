@@ -37,6 +37,9 @@ Cette page définit le vocabulaire minimal d'une structure agentique fonctionnel
 | Claim ledger | Registre reliant les affirmations importantes à une preuve, une source ou une hypothèse explicite. |
 | Evidence pack | Paquet regroupant les preuves nécessaires à un verdict de vérification ou une acceptation. |
 | Pattern record | Fiche de gouvernance d'un pattern : statut, maturité, exigences couvertes, preuves attendues et relations. |
+| Control record | Fiche décrivant un contrôle : objectif, déclenchement, décision, preuve, télémétrie et réponse en cas d'échec. |
+| Exception de conformité | Écart temporaire à une exigence applicable, accepté avec risque, owner, approbateur, contrôle compensatoire et expiration. |
+| Traceability record | Enregistrement reliant besoin, exigence, pattern, contrôle, preuve, verdict et télémétrie. |
 | Dossier d'acceptation | Ensemble de preuves, limites et décisions permettant au client d'accepter ou refuser un livrable. |
 
 ## Contexte et mémoire
@@ -70,6 +73,8 @@ Cette page définit le vocabulaire minimal d'une structure agentique fonctionnel
 | --- | --- |
 | Eval | Cas de test agentique permettant de mesurer un prompt, un modèle, un subagent ou un workflow. |
 | SLO agentique | Objectif mesurable de qualité, coût, latence, sécurité, rework ou fiabilité. |
+| Télémétrie agentique | Ensemble corrélé de traces, métriques, logs et événements décrivant les runs, décisions, coûts et contrôles. |
+| Trace agentique | Reconstitution structurée d'un run, composée de spans liés à mission, contexte, modèle, outil, preuve et verdict. |
 | Dry-run | Simulation contrôlée d'une action risquée avant exécution réelle. |
 | Incident agentique | Erreur significative impliquant action non autorisée, faux Done, mémoire polluée, fuite ou mauvaise décision. |
 | Faux Done | État où l'agent annonce une tâche terminée sans preuve suffisante. |

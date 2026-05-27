@@ -12,7 +12,9 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 - [Modèle de référence d'une structure agentique](docs/modele-reference-structure-agentique.md)
 - [Exigences normatives d'une structure agentique](docs/exigences-normatives-structure-agentique.md)
 - [Catalogue des patterns agentiques](docs/patterns/README.md)
+- [Parcours d'implémentation agentique](docs/parcours-implementation-agentique.md)
 - [Relations entre patterns agentiques](docs/patterns/relations-patterns.md)
+- [Matrice de maturité des patterns](docs/patterns/matrice-maturite-patterns.md)
 - [Matrice patterns, exigences et preuves](docs/patterns/matrice-patterns-exigences-preuves.md)
 - [Contrats formels agentiques](docs/patterns/contrats-formels-agentiques.md)
 - [Lifecycle et maturité des patterns](docs/patterns/lifecycle-maturite-patterns.md)
@@ -23,8 +25,18 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 - [Ledger, preuves et verdicts agentiques](docs/ledger-preuves-verdicts-agentiques.md)
 - [Mémoire hybride agentique](docs/memoire-hybride-agentique.md)
 - [Matrice de preuves de conformité agentique](docs/matrice-preuves-conformite-agentique.md)
+- [Profils de preuves par type de tâche](docs/profils-preuves-par-tache.md)
+- [Audit et conformité agentique](docs/audit-conformite-agentique.md)
+- [Catalogue des contrôles agentiques](docs/catalogue-controles-agentiques.md)
+- [Matrice risques, contrôles et preuves](docs/matrice-risques-controles-preuves.md)
+- [Checklist d'évaluation de conformité](docs/checklist-evaluation-conformite.md)
+- [Gestion des exceptions de conformité](docs/gestion-exceptions-conformite.md)
+- [Modèle de traçabilité agentique](docs/modele-tracabilite-agentique.md)
+- [Observabilité et télémétrie agentiques](docs/observabilite-telemetrie-agentique.md)
 - [Cadre agent-utilisateur](docs/cadre-agent-utilisateur.md)
 - [Architecture de pilotage agentique](docs/architecture-pilotage-agentique.md)
+- [Architecture cible issue des références agentiques](docs/architecture-cible-reference-agentique.md)
+- [Plan complet d'ajouts à la conception agentique](docs/plan-ajouts-conception-agentique.md)
 - [Orchestration du contexte agentique](docs/orchestration-contexte-agentique.md)
 - [Gouvernance d'exécution agentique](docs/gouvernance-execution-agentique.md)
 - [Défauts IA et fiabilité agentique](docs/defauts-ia-et-fiabilite.md)
@@ -40,6 +52,7 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 - [Références agentiques](docs/references-agentiques.md)
 - [Modèle de brief agentique](docs/modeles/brief-agentique.md)
 - [Modèles opérationnels agentiques](docs/contrats-operationnels-agentiques.md#templates-disponibles)
+- [Exemples remplis de contrats](docs/parcours-implementation-agentique.md#exemples-prets-a-adapter)
 - [Source Mermaid du cycle](diagrammes/cycle-agentique.mmd)
 - [Source Mermaid de l'orchestration](diagrammes/orchestration-agentique.mmd)
 - [Source Mermaid de l'orchestration du contexte](diagrammes/orchestration-contexte-agentique.mmd)
@@ -47,6 +60,8 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 - [Source Mermaid du runtime agentique](diagrammes/runtime-surfaces-agentiques.mmd)
 - [Source Mermaid du ledger de preuves](diagrammes/ledger-preuves-verdicts.mmd)
 - [Source Mermaid de la mémoire hybride](diagrammes/memoire-hybride-agentique.mmd)
+- [Source Mermaid de l'audit et observabilité](diagrammes/audit-observabilite-agentique.mmd)
+- [Source Mermaid du schéma idéal issu des références](diagrammes/schema-ideal-reference-agentique.mmd)
 - [Source Mermaid des patterns organisationnels](diagrammes/patterns-organisation.mmd)
 - [Source Mermaid des patterns d'orchestration et contexte](diagrammes/patterns-orchestration-contexte.mmd)
 - [Source Mermaid des patterns de gouvernance](diagrammes/patterns-gouvernance-controles.mmd)
@@ -71,6 +86,7 @@ Cette documentation n'est pas un tutoriel ni un exemple d'implémentation. Elle 
 13. La qualité du livrable ne repose pas sur la confiance dans le modèle, mais sur des preuves : tests, lint, build, rendus, revues, evals, red teaming, logs, SLO et acceptation client.
 14. Les runtimes agentiques ont leurs propres surfaces de contrôle et de sortie : agents, skills, hooks, workflows, preuves, traces et artefacts doivent être versionnés, audités, promus ou purgés.
 15. La conformité agentique se prouve par des artefacts actifs : mission ledger, evidence packs, verification verdicts, registres, manifests, hooks, policies et dossiers d'acceptation.
+16. L'observabilité et la télémétrie doivent expliquer les décisions sans exposer de données sensibles : traces, métriques, logs et événements sont corrélés, minimisés et gouvernés par rétention.
 
 ## Nature du référentiel
 

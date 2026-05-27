@@ -28,9 +28,12 @@ La source autonome est disponible dans [../diagrammes/runtime-surfaces-agentique
 | Skills | Encapsuler procédures réutilisables. | procédure obsolète ou trop large. | préconditions, sorties, score qualité. |
 | Agents dynamiques | Ajouter une capacité spécialisée. | prolifération, responsabilité floue. | triage durabilité, expiration, promotion. |
 | Workflows | Orchestrer étapes et transitions. | boucle infinie, passage prématuré. | DoR/DoD, circuit breaker, preuves. |
+| Workflow state manifests | Déclarer états, guards et interruptions. | logique cachée, reprise impossible. | validation, evidence gate, ledger. |
 | Hooks | Bloquer ou observer actions critiques. | blocage excessif ou faux sentiment de sécurité. | mode shadow/canary/enforced, registre. |
 | Policies | Décider allow/warn/block/escalate. | règle implicite ou contournable. | registre, journal, tests. |
 | MCP et outils | Connecter systèmes externes. | fuite, mutation non autorisée. | scopes, timeout, logs, validation. |
+| Runtime providers | Exécuter local, IDE, distant ou cluster. | secrets exposés, ressources non contrôlées. | provider contract, health, cleanup. |
+| Capability packs | Distribuer rôles, prompts et skills. | prolifération ou capacité obsolète. | owner, version, tests, lifecycle. |
 
 ## Surfaces de sortie
 
@@ -44,6 +47,33 @@ La source autonome est disponible dans [../diagrammes/runtime-surfaces-agentique
 | Runtime logs | diagnostic et audit. | politique de logs, purge. |
 | Memory projections | index vectoriels, graphe, caches. | réindexation, désindexation, invalidation. |
 | Dynamic artifacts | agents, prompts, skills ou hooks générés. | éphémère par défaut, promotion si réutilisé. |
+| Trajectory logs | Séquence intention -> action -> observation -> décision. | TTL selon risque, minimisation. |
+| Browser evidence | DOM, screenshots, console et réseau. | TTL court sauf preuve d'acceptation ou incident. |
+
+## Runtime provider contract
+
+Un runtime provider DOIT exposer le même contrat minimal, qu'il soit local, IDE, subprocess, tmux, ACP, distant ou Kubernetes.
+
+| Dimension | Obligation |
+| --- | --- |
+| Lifecycle | prepare, spawn, execute, observe, stop, cleanup. |
+| Ressources | CPU, mémoire, durée, fichiers, réseau et secrets limités. |
+| Sécurité | env scrub, workspace isolation, path allowlist, network policy. |
+| Observabilité | trace_id, logs, health, coût, erreurs, cleanup status. |
+| Compatibilité | outils, modèles, MCP et capabilities déclarés avant usage. |
+
+## Capability marketplace et lifecycle
+
+Les capacités ne sont pas de simples prompts. Elles DOIVENT être publiées comme capability packs ou skill records.
+
+| Statut | Usage |
+| --- | --- |
+| draft | conception, non routable automatiquement. |
+| experimental | usage limité, preuves en collecte. |
+| canary | disponible sur périmètre réduit. |
+| enforced | capacité stable, routable selon policy. |
+| deprecated | remplacement prévu, usage restreint. |
+| retired | non routable, historique conservé. |
 
 ## Cycle de vie des hooks
 

@@ -5,16 +5,18 @@ flowchart TD
     C --> D["Plan de recuperation<br/>quoi chercher, ou chercher, seuils"]
 
     D --> E1["Redis chaud<br/>etat session, Kanban, cache, derniers resultats"]
-    D --> E2["Base vectorielle<br/>docs, ADR, incidents, patterns, similarite"]
+    D --> E2["Knowledge Base Indexer<br/>repos, URLs, APIs, MCP, DB, dossiers"]
     D --> E3["Sources de verite<br/>workspace, tests, CI, docs officielles"]
     D --> E4["Graphe et sidecar<br/>relations, validite, provenance"]
     D --> E5["Registre de retention<br/>active, archive, superseded, obsolete"]
+    D --> E6["Base vectorielle<br/>similarite et rappel candidat"]
 
     E1 --> F["Filtre et critique<br/>fraicheur, source, score, sensibilite"]
     E2 --> F
     E3 --> F
     E4 --> F
     E5 --> F
+    E6 --> F
 
     F --> G{Contexte suffisant et sur ?}
     G -- Non --> H["Reduire, verifier ou demander<br/>source manquante, risque, question client"]

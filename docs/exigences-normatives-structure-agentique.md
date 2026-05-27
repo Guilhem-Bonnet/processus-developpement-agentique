@@ -117,3 +117,17 @@ Cette page exprime les exigences sous forme normative. Elle sert de base de conf
 | AG-PAT-002 | Tout pattern normatif DOIT être relié à au moins une exigence et une preuve attendue. | obligatoire |
 | AG-PAT-003 | Tout pattern DEVRAIT avoir un statut de lifecycle et un niveau de maturité. | recommandé |
 | AG-PAT-004 | Tout pattern déprécié DOIT pointer vers son remplacement ou sa raison de retrait. | obligatoire |
+
+## Audit, observabilité et télémétrie
+
+| ID | Exigence | Niveau |
+| --- | --- | --- |
+| AG-AUD-001 | Toute conformité déclarée DOIT pouvoir être reliée à une exigence, un contrôle, une preuve et un verdict. | obligatoire |
+| AG-AUD-002 | Toute exception de conformité DOIT avoir justification, risque, owner, approbateur, contrôle compensatoire et expiration. | obligatoire |
+| AG-AUD-003 | Une structure gouvernée DOIT maintenir une matrice risques, contrôles et preuves. | obligatoire |
+| AG-AUD-004 | Un audit de conformité DEVRAIT produire un rapport avec niveau atteint, écarts, exceptions et risques résiduels. | recommandé |
+| AG-OBS-001 | Les runs agentiques à risque DOIVENT produire des traces corrélées par mission_id, task_id et trace_id. | obligatoire |
+| AG-OBS-002 | Les traces, logs et événements NE DOIVENT PAS exposer secrets ou données personnelles inutiles. | obligatoire |
+| AG-OBS-003 | Les appels modèle, outil, hook, contexte, preuve et verdict DOIVENT produire une télémétrie suffisante pour audit. | obligatoire |
+| AG-OBS-004 | Les SLO agentiques DEVRAIENT être suivis par métriques et alertes. | recommandé |
+| AG-OBS-005 | Les événements critiques, incidents et exceptions DOIVENT être conservés selon une politique de rétention explicite. | obligatoire |

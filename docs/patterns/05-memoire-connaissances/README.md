@@ -2,6 +2,14 @@
 
 Ces patterns empêchent la mémoire agentique de devenir un vrac sémantique. Ils organisent rappel, vérité, rétention, désindexation et correction.
 
+Ils distinguent trois plans qui sont souvent confondus :
+
+| Plan | Rôle | Ce que ce n'est pas |
+| --- | --- | --- |
+| Base de connaissance indexée | Corpus externe gouverné, branché via repo, URL, API, MCP, base de données ou dossier, puis rendu recherchable. | Ce n'est pas la mémoire de l'agent. |
+| Mémoire agentique | Ce que le système retient de ses missions, décisions, incidents et apprentissages. | Ce n'est pas une documentation métier exhaustive. |
+| Contexte de session | Paquet minimal transmis à une tâche ou un subagent. | Ce n'est pas une base durable. |
+
 La source Mermaid de cette famille est disponible dans [../../../diagrammes/patterns-memoire-connaissances.mmd](../../../diagrammes/patterns-memoire-connaissances.mmd).
 
 ## KNO-01 : Knowledge janitor
@@ -75,6 +83,79 @@ La source Mermaid de cette famille est disponible dans [../../../diagrammes/patt
 | Revalidation | Rejouer décisions ou tâches impactées si critique. |
 | Prévention | Ajouter hook, eval, règle de promotion ou cleanup. |
 
+## KNO-06 : Knowledge Base Indexer
+
+| Élément | Description |
+| --- | --- |
+| Intention | Greffer une base documentaire externe au système agentique pour spécialiser un flow sur un domaine, produit, client ou entreprise. |
+| Problème | Un agent générique ne connaît pas les spécifications internes, procédures, APIs, contraintes métier ou historiques de décision d'une organisation. Tout mettre en prompt ou en mémoire agentique mélange les responsabilités et devient ingouvernable. |
+| Solution | Déclarer des sources de connaissance externes via connecteurs (repo, URL, API, MCP, base de données, dossier), les indexer avec métadonnées, ACL, fraîcheur et stratégie de réindexation, puis exposer la recherche à l'orchestrateur de contexte. |
+| Contrôles | Pre-index, source owner, ACL, sensibilité, freshness check, réindexation, désindexation, source quarantine. |
+| Anti-pattern | Appeler cette base “mémoire” ou injecter toute la documentation dans chaque prompt. |
+
+### Connecteurs typiques
+
+| Connecteur | Usage | Point de contrôle |
+| --- | --- | --- |
+| Repo Git | Code, docs, ADR, specs versionnées. | Branche, commit, owner, secret scan, fraîcheur. |
+| URL / site docs | Documentation produit ou fournisseur. | Crawl scope, robots/politiques, date de capture, hash. |
+| API | Référentiel métier, tickets, catalogue, CRM. | Auth, rate limit, champs sensibles, pagination. |
+| MCP | Source exposée comme outil/serveur. | MCP Trust Gate, permissions, variables d'environnement. |
+| Base de données | Données structurées ou catalogue interne. | Read-only, requêtes autorisées, masquage. |
+| Dossier local | Documentation client, exports, procédures. | Classification, owner, indexable, TTL. |
+
+### Pipeline d'indexation
+
+| Étape | Sortie attendue |
+| --- | --- |
+| Déclaration | `knowledge-source-index` avec owner, type, périmètre, ACL et sensibilité. |
+| Ingestion | Documents découpés avec source_id, version, hash et provenance. |
+| Enrichissement | Métadonnées, langue, produit, domaine, validité, tags et relations. |
+| Indexation | Index lexical, vectoriel et/ou graphe selon usage. |
+| Recherche | Résultats candidats avec score, extrait, source, fraîcheur et restrictions. |
+| Vérification | Retour à la source active pour décisions critiques. |
+| Réindexation | Trigger par commit, webhook, calendrier, version ou incident. |
+
+## KNO-07 : Memory integrity validator
+
+| Élément | Description |
+| --- | --- |
+| Intention | Vérifier que les mémoires utilisées restent sourcées, fraîches et non contaminées. |
+| Problème | Une mémoire durable peut devenir fausse, obsolète, sensible ou contradictoire avec une source active. |
+| Solution | Auditer périodiquement les mémoires par provenance, validité, TTL, contradictions, usage récent et sensibilité. |
+| Contrôles | Memory routing policy, source registry, contamination response, doc drift detector. |
+| Anti-pattern | Réutiliser une mémoire ancienne parce qu'elle est souvent similaire aux demandes courantes. |
+
+## KNO-08 : Doc-to-graph pipeline
+
+| Élément | Description |
+| --- | --- |
+| Intention | Transformer un corpus documentaire en graphe de relations exploitable et vérifiable. |
+| Problème | L'indexation vectorielle retrouve des passages mais ne représente pas dépendances, contradictions, supersessions ou preuves. |
+| Solution | Extraire nœuds et relations depuis docs/code/ADR/tickets/API, avec provenance, confiance et statut de fraîcheur. |
+| Contrôles | Source graph record, relation provenance, conflict resolver, freshness check. |
+| Anti-pattern | Construire un graphe d'hypothèses non sourcées ou non révisables. |
+
+## KNO-09 : Knowledge narrative packaging
+
+| Élément | Description |
+| --- | --- |
+| Intention | Présenter une connaissance complexe sous une forme narrative exploitable par humains et agents. |
+| Problème | Un graphe ou un index peut être correct mais trop fragmenté pour onboarding, audit ou décision. |
+| Solution | Générer des packages narratifs sourcés : résumé, décisions, concepts, dépendances, risques, exemples et preuves. |
+| Contrôles | Claim ledger, source graph, doc drift, owner, date de validité. |
+| Anti-pattern | Produire une synthèse persuasive sans liens vers sources actives. |
+
+## KNO-10 : Source Graph Resolver
+
+| Élément | Description |
+| --- | --- |
+| Intention | Résoudre les relations entre sources pour éviter qu'une similarité soit prise pour une preuve. |
+| Problème | Code, documentation, ADR, tickets, API et mémoire peuvent dépendre, se contredire ou se remplacer sans que le RAG le voie. |
+| Solution | Interroger le graphe source pour retrouver dépendances, supersessions, contradictions, preuves et source active avant décision. |
+| Contrôles | Source graph record, context conflict resolver, claim ledger, freshness check. |
+| Anti-pattern | Utiliser seulement top-k vectoriel pour arbitrer une contradiction documentaire. |
+
 ## Relation avec l'orchestrateur de contexte avancé
 
 La mémoire hybride fournit des couches de rappel et de vérité. L'orchestrateur de contexte avancé, défini dans [02-orchestration-contexte](../02-orchestration-contexte/README.md#orc-05--orchestrateur-de-contexte-avance), décide quelles couches utiliser, comment les pondérer, quoi exclure, quoi vérifier et quoi transmettre.
@@ -94,6 +175,10 @@ La mémoire hybride fournit des couches de rappel et de vérité. L'orchestrateu
 | Interface | Rôle |
 | --- | --- |
 | Source registry | Donne statut, propriétaire, sensibilité et validité. |
+| Knowledge source index | Déclare les corpus externes indexables, leurs connecteurs, ACL et règles de réindexation. |
+| Memory routing policy | Définit l'usage des couches mémoire/connaissance/source selon situation. |
+| Source graph record | Décrit nœuds, relations, contradictions et provenance. |
+| Source graph resolver | Résout dépendances, contradictions et supersessions avant décision. |
 | Registre de rétention | Décide durable, archive, TTL, désindexation ou purge. |
 | Memory gate | Contrôle lectures, écritures, indexation et invalidation. |
 | Rapport de drift | Signale divergence entre documentation, runtime et mémoire. |

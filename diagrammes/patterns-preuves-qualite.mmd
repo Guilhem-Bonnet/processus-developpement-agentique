@@ -3,4 +3,12 @@ flowchart TD
     C["QUA-02 Observabilité agentique"] --> B
     D["QUA-03 Mission ledger append-only"] --> B
     B --> E["QUA-05 Evidence-driven transition"]
+    G["QUA-06 LLM cost registry\npricing + tokens + budget"] --> C
+    H["QUA-07 Session reliability SLO reporter\nCrashRate / UnhealthyRate"] --> C
+    I["QUA-08 Agent telemetry plane\ntraces + metrics + events"] --> C
+    J["QUA-09 Prompt/version observability\nprompt/model/eval version"] --> I
+    K["QUA-10 Trajectory logging\nintent -> tool -> observation"] --> D
+    L["QUA-11 Browser evidence contract\nDOM + screenshot + network"] --> B
+    M["QUA-12 Visual Evidence Pack\nUX + captures"] --> B
+    N["QUA-13 Eval lifecycle\ndataset + judge + threshold"] --> I
     E --> F["Close / reopen / incident / escalate"]
